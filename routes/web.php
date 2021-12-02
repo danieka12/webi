@@ -18,12 +18,20 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get("/materi/baca/{slug}", function () {
+    return view("course-read");
+});
+
 Route::get('/materi', function () {
     return view('course');
 });
 
 Route::get('/materi/{id}', function () {
     return view('course-detail');
+});
+
+Route::get("/detail/guru/{id}", function () {
+    return view('teacher-detail');
 });
 
 
