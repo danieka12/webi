@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/materi', function () {
+    return view('course');
+});
+
+Route::get('/materi/{id}', function () {
+    return view('course-detail');
+});
+
 
 /*
 |--------------------------------------------------------------------------
