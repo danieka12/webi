@@ -11,6 +11,17 @@ class Guru extends Model
     use HasFactory;
     use Uuid;
 
+    protected $table = 'guru'; // renaming table name
     public $incrementing = false;
     public $keyType = 'uuid';
+    protected $fillable = [
+        "email",
+        "nama",
+        "password"
+    ];
+
+    public function setPasswordAttribute(string $value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 }
