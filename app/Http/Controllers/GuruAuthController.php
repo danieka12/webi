@@ -16,7 +16,7 @@ class GuruAuthController extends Controller
 {
     public function showRegister()
     {
-        // showing the view of auth guru
+        return view("auth.guru.register");
     }
 
     /**
@@ -35,6 +35,7 @@ class GuruAuthController extends Controller
 
     public function showLogin()
     {
+        return view("auth.guru.login");
     }
 
 

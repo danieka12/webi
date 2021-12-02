@@ -9,5 +9,6 @@
 </body>
 
 @include("components.script")
+@stack("scripts")
 
 </html>
