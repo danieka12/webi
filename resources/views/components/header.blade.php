@@ -2,9 +2,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Udema a modern educational site template">
-    <meta name="author" content="Ansonika">
-    <title>UDEMA | Modern Educational site template</title>
+    <meta name="description" content="Web pembelajaran interaktif">
+    <meta name="author" content="Adjie">
+    <title>{{ isset($title) ? "WEBI | " . $title : "WEBI Pembelajaran Interaktif" }}</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
