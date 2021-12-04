@@ -7,11 +7,11 @@
     <title>{{ isset($title) ? "WEBI | " . $title : "WEBI Pembelajaran Interaktif" }}</title>
 
     <!-- Favicons-->
-    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" type="image/x-icon" href="image/apple-touch-icon-57x57-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="image/apple-touch-icon-72x72-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="image/apple-touch-icon-114x114-precomposed.png">
-    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="image/apple-touch-icon-144x144-precomposed.png">
+    <link rel="shortcut icon" href={{ asset("images/favicon.ico") }} type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href={{ asset("images/apple-touch-icon-57x57-precomposed.png") }}>
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href={{ asset("images/apple-touch-icon-72x72-precomposed.png") }}>
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href={{ asset("images/apple-touch-icon-114x114-precomposed.png") }}>
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href={{ asset("images/apple-touch-icon-144x144-precomposed.png") }}>
 
     <!-- GOOGLE WEB FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

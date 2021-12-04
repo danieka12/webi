@@ -2,7 +2,7 @@
     <div class="container margin_120_95">
         <div class="row justify-content-between">
             <div class="col-lg-5 col-md-12">
-                <p><img src="image/logo.png" width="149" height="42" alt=""></p>
+                <p><img src="images/logo.png" width="149" height="42" alt=""></p>
                 <p>Mea nibh meis philosophia eu. Duis legimus efficiantur ea sea. Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu. Nihil facilisi indoctum an vix, ut delectus expetendis vis.</p>
                 <div class="follow_us">
                     <ul>
