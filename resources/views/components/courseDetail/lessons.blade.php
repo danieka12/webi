@@ -1,12 +1,12 @@
 <section id="lessons">
     <div class="intro_title">
-        <h2>Programme</h2>
+        <h2>Materi</h2>
     </div>
     <div id="accordion_lessons" role="tablist" class="add_bottom_45">
         <div class="card">
             <div class="card-header" role="tab" id="headingOne">
                 <h5 class="mb-0">
-                    <a data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="indicator ti-minus"></i> Year 1</a>
+                    <a data-bs-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><i class="indicator ti-minus"></i>BAB 1</a>
                 </h5>
             </div>
 
@@ -41,7 +41,7 @@
             <div class="card-header" role="tab" id="headingTwo">
                 <h5 class="mb-0">
                     <a data-bs-toggle="collapse" data-bs-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <i class="indicator ti-plus"></i>Year 2
+                        <i class="indicator ti-plus"></i>BAB 2
                     </a>
                 </h5>
             </div>
@@ -76,7 +76,7 @@
             <div class="card-header" role="tab" id="headingThree">
                 <h5 class="mb-0">
                     <a data-bs-toggle="collapse" data-bs-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <i class="indicator ti-plus"></i>Year 3
+                        <i class="indicator ti-plus"></i>BAB 3
                     </a>
                 </h5>
             </div>
