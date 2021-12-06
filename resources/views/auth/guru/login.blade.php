@@ -4,7 +4,6 @@
 		{{-- include guru component --}}
 		@include('auth.guru.logo') 
 	  <form>
-		<div class="divider"><span>Or</span></div>
 		<div class="form-group">
 			<span class="input">
 			<input class="input_field" type="email" autocomplete="off" name="email">
