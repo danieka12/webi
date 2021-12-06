@@ -37,6 +37,10 @@ Route::get("/guru/detail/{id}", function () {
     return view('teacher-detail');
 });
 
+Route::get("/materi/gabung/{slug}", function () {
+    return view('take-course');
+});
+
 
 /*
 |--------------------------------------------------------------------------
