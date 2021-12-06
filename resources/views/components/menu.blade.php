@@ -20,7 +20,6 @@
                     <li><a href="courses-grid.html">Courses grid</a></li>
                 </ul>
             </li>
-            <li><span><a href="#0">Buy template</a></span></li>
         </ul>
     </nav>
     <!-- Search Menu -->

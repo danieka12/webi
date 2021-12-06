@@ -11,7 +11,7 @@
     </div>
     <!-- /carousel -->
     <div class="container">
-        <p class="btn_home_align"><a href="courses-grid.html" class="btn_1 rounded">{{ isset($viewAllCourse) ? $viewAllCourse : "Lihat Semua Materi" }}</a></p>
+        <p class="btn_home_align"><a href="/materi/semua" class="btn_1 rounded">{{ isset($viewAllCourse) ? $viewAllCourse : "Lihat Semua Materi" }}</a></p>
     </div>
     <!-- /container -->
     <hr>

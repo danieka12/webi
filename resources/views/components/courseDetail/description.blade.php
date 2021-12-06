@@ -3,7 +3,7 @@
        @include('components.courseDetail.panel')
     </div>
     <!-- /box_highlight -->
-    <h2>Deskripsi</h2>
+    <h2>Tujuan Pembelajaran</h2>
     <p>Per consequat adolescens ex, cu nibh commune temporibus vim, ad sumo viris <strong>eloquentiam sed</strong>. Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam <strong>vulputate</strong> pertinacia eum at.</p>
     <p>Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum at.</p>
     <div class="row">
