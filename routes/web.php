@@ -33,7 +33,7 @@ Route::get('/materi/detail/{id}', function () {
     return view('course-detail');
 });
 
-Route::get("/detail/guru/{id}", function () {
+Route::get("/guru/detail/{id}", function () {
     return view('teacher-detail');
 });
 

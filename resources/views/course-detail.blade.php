@@ -2,7 +2,7 @@
 
 @section('content')
 	<main>
-		@include('components.courseDetail.hero')
+		@include('components.miniComponents.hero')
 		<!--/hero_in-->
 
 		<div class="bg_color_1">
