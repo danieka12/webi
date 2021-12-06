@@ -29,4 +29,14 @@ class Guru extends Model
     {
         return $this->hasOne(Penulis::class);
     }
+
+    public function tujuanPembelajaran()
+    {
+        return $this->hasMany(TujuanPembelajaran::class);
+    }
+
+    public function gabungMateri()
+    {
+        return $this->hasMany(GabungMateri::class);
+    }
 }

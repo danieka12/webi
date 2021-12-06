@@ -11,7 +11,7 @@ class Materi extends Model
     use HasFactory;
     use Uuid;
 
-    protected $table = 'penulis';
+    protected $table = 'materi';
     public $incrementing = false;
     public $keyType = 'uuid';
     protected $fillable = [
@@ -22,11 +22,28 @@ class Materi extends Model
     ];
 
 
-    public function opsiMateri() {
+    public function opsiMateri()
+    {
         return $this->belongsTo(OpsiMateri::class);
     }
 
-    public function penulis() {
+    public function penulis()
+    {
         return $this->belongsTo(Penulis::class);
+    }
+
+    public function materiCoverGambar()
+    {
+        return $this->hasOne(MateriCoverGambar::class);
+    }
+
+    public function tujuanPembelajaran()
+    {
+        return $this->hasOne(TujuanPembelajaran::class);
+    }
+
+    public function gabungMateri()
+    {
+        return $this->hasOne(GabungMateri::class);
     }
 }
