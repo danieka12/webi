@@ -15,11 +15,15 @@
     <nav id="menu" class="main-menu">
         <ul>
             <li><span><a href="/">Beranda</a></span></li>
-            <li><span><a href="#0">Materi</a></span>
-                <ul>
-                    <li><a href="courses-grid.html">Courses grid</a></li>
-                </ul>
-            </li>
+            @isset($courseLabel)
+                <li><span><a href="#0">Materi</a></span>
+                    <ul>
+                        @foreach ($courseLabel as $label)
+                        <li><a href={{ $label['href'] }}>{{ $label['title'] }}</a></li>
+                        @endforeach
+                    </ul>
+                </li>
+            @endisset
             <li><span><a href="/">Tentang Peneliti</a></span></li>
         </ul>
     </nav>

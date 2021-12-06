@@ -2,7 +2,7 @@
     <div class="container">
         <ul>
             <li><i class="pe-7s-science"></i>
-                <h4>+200 Materi</h4><span>Explore a variety of fresh topics</span>
+                <h4>+{{ isset($howManyCourse) ? $howManyCourse : 0 }} Materi</h4><span>Explore a variety of fresh topics</span>
             </li>
             <li><i class="pe-7s-cup"></i>
                 <h4>Guru yang berpengalaman</h4><span>Find the right instructor for you</span>
