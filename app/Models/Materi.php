@@ -46,4 +46,9 @@ class Materi extends Model
     {
         return $this->hasOne(GabungMateri::class);
     }
+
+    public function komentar()
+    {
+        return $this->hasMany(Komentar::class);
+    }
 }

@@ -6,32 +6,33 @@ use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Penulis extends Model
+class Komentar extends Model
 {
     use HasFactory;
     use Uuid;
 
-    protected $table = 'penulis';
+    protected $table = 'komentar';
     public $incrementing = false;
     public $keyType = 'uuid';
     protected $fillable = [
-        "guru_id",
-        "foto_profile",
-        "description"
+        "materi_id",
+        "penulis_id",
+        "siswa_id",
+        "konten"
     ];
 
     public function materi()
     {
-        return $this->hasMany(Materi::class);
+        return $this->belongsTo(Materi::class);
     }
 
-    public function guru()
+    public function penulis()
     {
-        return $this->belongsTo(Guru::class);
+        return $this->belongsTo(Penulis::class);
     }
 
-    public function komentar()
+    public function siswa()
     {
-        return $this->hasMany(Komentar::class);
+        return $this->belongsTo(Siswa::class);
     }
 }
