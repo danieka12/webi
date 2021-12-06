@@ -17,12 +17,17 @@ class Siswa extends Model
     public $keyType = 'uuid';
     protected $fillable = [
         "nis",
-        "nama",
+        "name",
         "password"
     ];
     protected $hidden = [
         'password'
     ];
+
+    public function setPasswordAttribute(string $value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
 
     public function gabungMateri()
     {

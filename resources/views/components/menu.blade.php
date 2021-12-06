@@ -20,7 +20,7 @@
                     <li><a href="courses-grid.html">Courses grid</a></li>
                 </ul>
             </li>
-            <li><span><a href="/">Masuk Sebagai Guru</a></span></li>
+            <li><span><a href="/">Tentang Peneliti</a></span></li>
         </ul>
     </nav>
 </header>
