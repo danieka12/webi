@@ -24,4 +24,9 @@ class Guru extends Model
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public function penulis()
+    {
+        return $this->hasOne(Penulis::class);
+    }
 }
