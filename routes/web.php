@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $popularData = [['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'course-detail.html', 'hasEnroll' => true], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'course-detail.html', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'course-detail.html', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'course-detail.html', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'course-detail.html', 'hasEnroll' => false]];
+    return view('home')->with(['populars' => $popularData]);
 });
 
 Route::get("/materi/baca/{slug}", function () {
