@@ -22,7 +22,5 @@
             </li>
         </ul>
     </nav>
-    <!-- Search Menu -->
-    {{-- @include('components.miniComponents.search-menu') --}}
 </header>
 <!-- /header -->

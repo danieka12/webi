@@ -41,13 +41,20 @@ Route::get("/materi/gabung/{slug}", function () {
     return view('take-course');
 });
 
+Route::get("/login", function () {
+    return view('auth.siswa.login');
+});
+
+Route::get("/daftar", function () {
+    return view('auth.siswa.register');
+});
 
 /*
 |--------------------------------------------------------------------------
 | Guru Route
 |--------------------------------------------------------------------------
 */
-Route::name('guru.')->group(function () {
+Route::prefix("guru")->name('guru.')->group(function () {
     /*
 |--------------------------------------------------------------------------
 | Not-Protecting Route
@@ -57,7 +64,7 @@ Route::name('guru.')->group(function () {
         /**
          * Register Routes
          */
-        Route::get('/register', [GuruAuthController::class, 'showRegister'])->name('register.show');
+        Route::get('/daftar', [GuruAuthController::class, 'showRegister'])->name('register.show');
         Route::post('/register', [GuruAuthController::class, 'register'])->name('register.perform');
 
         /**
