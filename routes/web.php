@@ -30,10 +30,7 @@ Route::get("/materi/baca/{slug}", function () {
     return view("course-read");
 });
 
-Route::get('/materi/{label?}', function () {
-    return view('course');
-});
-
+Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('course.search');
 Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('course.detail');
 Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('course.join');
 

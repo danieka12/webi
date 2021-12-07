@@ -15,7 +15,7 @@ class OpsiMateri extends Model
     public $incrementing = false;
     public $keyType = 'uuid';
     protected $fillable = [
-        "title"
+        "judul"
     ];
 
     public function materi()

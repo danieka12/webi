@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\GabungMateri;
 use App\Models\Materi;
+use App\Models\OpsiMateri;
 use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -15,9 +16,23 @@ class CourseController extends Controller
         return explode(".", $params)[1];
     }
 
-    private function strLimit(string $str)
+    private function strLimit(string $str, $limit = 15)
     {
-        return Str::limit($str, $limit = 15, $end = "...");
+        return Str::limit($str, $limit, $end = "...");
+    }
+
+    private function revertSlug(string $slug)
+    {
+        return Str::title(str_replace('-', ' ', $slug));
+    }
+
+    private function href(string $prefix, string $slug, bool $withId = false, string $id = null)
+    {
+        if ($withId) {
+            return $prefix . Str::slug($slug) . "." . $id;
+        }
+
+        return $prefix . Str::slug($slug);
     }
 
     public function detail($slug)
@@ -63,5 +78,35 @@ class CourseController extends Controller
         $joinCourse->save();
 
         return view('course-detail')->with(['hasJoin' => false]);
+    }
+
+    public function filterCourseByLabel(string $label)
+    {
+        $opsiMateri = [];
+        $courseList = [];
+        $courseLabelList = collect(OpsiMateri::limit(8)->get())->map(function ($query) {
+            return [
+                'id' => $query['id'],
+                'title' => $this->strLimit($query['judul'], 10)
+            ];
+        });
+
+        if ($label != "semua") {
+            $opsiMateri = OpsiMateri::with("materi.materiCoverGambar")->where('judul', 'LIKE', "%" . $this->revertSlug($label) . "%")->first();
+
+            $courseList = collect($opsiMateri['materi'])->map(function ($courseList) use ($opsiMateri) {
+                return  [
+                    'courseLabel' => $opsiMateri['judul'],
+                    'title' => $courseList['judul'],
+                    'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.',
+                    'timeToComplete' => '1h 30min',
+                    'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
+                    'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
+                    'hasEnroll' => false
+                ];
+            });
+        }
+
+        return view('course')->with(['labelTitle' => $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
 }
