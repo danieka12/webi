@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +34,7 @@ Route::get('/materi/{label?}', function () {
     return view('course');
 });
 
-Route::get('/materi/detail/{id}', function () {
-    return view('course-detail');
-});
+Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail-course');
 
 Route::get("/guru/detail/{id}", function () {
     return view('teacher-detail');

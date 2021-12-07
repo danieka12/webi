@@ -9,7 +9,7 @@
                 <li>
                     <a href="teacher-detail.html">
                         <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg" alt=""></figure>
-                        <h5>Tomas Hegel</h5>
+                        <h5>{{ $teacherName }}</h5>
                         <p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>
                 </li>
             </ul>

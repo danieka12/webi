@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Helpers\Content;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +20,7 @@ class MateriFactory extends Factory
             'opsi_materi_id' => DB::table("opsi_materi")->inRandomOrder()->limit(1)->first()->id,
             'penulis_id' => DB::table("penulis")->inRandomOrder()->limit(1)->first()->id,
             'judul' => $this->faker->sentence(4),
-            'konten' => $this->faker->randomHtml(2, 3)
+            'konten' => Content::courseExampleDescription()
         ];
     }
 }

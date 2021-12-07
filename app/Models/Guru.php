@@ -19,6 +19,10 @@ class Guru extends Model
         "nama",
         "password"
     ];
+    
+    protected $hidden = [
+        'password'
+    ];
 
     public function setPasswordAttribute(string $value)
     {
