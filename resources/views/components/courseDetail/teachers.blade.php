@@ -7,7 +7,7 @@
         <div class="col-lg-6">
             <ul class="list_teachers">
                 <li>
-                    <a href="teacher-detail.html">
+                    <a href={{ route('teacher.profile', ['id' => $guru['id']]) }}>
                         <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg" alt=""></figure>
                         <h5>{{ $teacherName }}</h5>
                         <p>Mathematics</p><i class="pe-7s-angle-right-circle"></i></a>

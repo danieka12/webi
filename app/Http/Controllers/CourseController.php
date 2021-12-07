@@ -46,10 +46,11 @@ class CourseController extends Controller
         $metaData = [
             'duration' => "2 Jam 30 Menit",
             'takeBy' => $course['gabung_materi_count'],
-            'category' => $this->strLimit($course['opsiMateri']['judul']),
+            'category' => $this->strLimit($course['opsiMateri']['judul'], 10),
             'content' => $course['konten'],
             'title' => $course['judul'],
             'guru' => [
+                'id' => $course['penulis']['guru']['id'],
                 'name' => $course['penulis']['guru']['name'],
                 'description' => $course['penulis']['description'],
                 'profile' => $course['penulis']['foto_profile'],

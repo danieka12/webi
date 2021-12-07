@@ -36,7 +36,7 @@ Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('co
 
 Route::get("/guru/detail/{id}", function () {
     return view('teacher-detail');
-});
+})->name('teacher.profile');
 
 Route::get("/materi/gabung/{slug}", function () {
     return view('take-course');

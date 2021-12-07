@@ -11,7 +11,7 @@
 			<div class="row">
 				@foreach ($courseList as $course)
 					@include('components.course.card-course', [
-						'href' => $course['href'], 
+						'href' => route('homepage') . "/" . $course['href'], 
 						'previewImage' => $course['previewImage'], 
 						'courseLabel' => $course['courseLabel'], 
 						'title' => $course['title'], 
