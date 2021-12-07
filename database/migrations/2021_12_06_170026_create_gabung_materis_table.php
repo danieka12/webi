@@ -18,7 +18,7 @@ class CreateGabungMaterisTable extends Migration
             $table->uuid('guru_id');
             $table->uuid('siswa_id');
             $table->uuid('materi_id');
-            $table->boolean('konfirmasi_gabung');
+            $table->boolean('konfirmasi_gabung')->default(false);
             $table->timestamps();
 
             $table->foreign('guru_id')->references('id')->on('guru')->onDelete('cascade');
