@@ -24,7 +24,17 @@
                     </ul>
                 </li>
             @endisset
-            <li><span><a href="/">Tentang Peneliti</a></span></li>
+            <li><span><a href="/tentang-peneliti">Tentang Peneliti</a></span></li>
+            
+            @auth
+                <li><span><a href="#0">Elang Indra</a></span>
+                    <ul>
+                        <li><a href="/">Profil Saya</a></li>
+                        <li><a href="/">Logout</a></li>
+                    </ul>
+                </li>
+            @endauth
+            
         </ul>
     </nav>
 </header>

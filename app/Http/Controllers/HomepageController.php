@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Materi;
 use App\Models\OpsiMateri;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 

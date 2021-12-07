@@ -53,6 +53,10 @@ Route::get("/daftar", function () {
     return view('auth.siswa.register');
 });
 
+Route::get("/tentang-peneliti", function () {
+    return view('about-author');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Guru Route
