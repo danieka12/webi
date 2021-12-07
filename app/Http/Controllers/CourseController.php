@@ -38,7 +38,8 @@ class CourseController extends Controller
                 'name' => $course['penulis']['guru']['name'],
                 'description' => $course['penulis']['description'],
                 'profile' => $course['penulis']['foto_profile'],
-            ]
+            ],
+            'slug' => $slug,
         ];
 
         return view('course-detail')->with($metaData);

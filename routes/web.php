@@ -34,8 +34,8 @@ Route::get('/materi/{label?}', function () {
     return view('course');
 });
 
-Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail-course');
-Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join-course');
+Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('course.detail');
+Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('course.join');
 
 Route::get("/guru/detail/{id}", function () {
     return view('teacher-detail');
