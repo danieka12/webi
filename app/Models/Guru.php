@@ -19,7 +19,7 @@ class Guru extends Model
         "nama",
         "password"
     ];
-    
+
     protected $hidden = [
         'password'
     ];
@@ -42,5 +42,10 @@ class Guru extends Model
     public function gabungMateri()
     {
         return $this->hasMany(GabungMateri::class);
+    }
+
+    public function mengajar()
+    {
+        return $this->hasMany(Mengajar::class);
     }
 }

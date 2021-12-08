@@ -51,4 +51,8 @@ class Materi extends Model
     {
         return $this->hasMany(Komentar::class);
     }
+
+    public function mengajar() {
+        return $this->belongsTo(Mengajar::class);
+    }
 }

@@ -18,6 +18,7 @@ class CreateMaterisTable extends Migration
             $table->uuid('opsi_materi_id');
             $table->uuid('penulis_id');
             $table->string('judul', 100);
+            $table->string('durasi', 25);
             $table->text('konten');
             $table->timestamps();
 

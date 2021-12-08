@@ -7,7 +7,10 @@
 		<!--/hero_in-->
 		<div class="container margin_60_35">
 			<div class="row">
-				@include('components.teachers.profile')
+				@include('components.teachers.profile', [
+					'teacherName' => 'Jenny Ghostbaum', 'siswaJoin' => 25, 
+					'courses' => 20
+					])
 				<!--/aside -->
 
 				@include('components.teachers.content')
