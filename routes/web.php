@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", [HomepageController::class, 'index'])->name("homepage");
 
-Route::get("/materi/baca/{slug}", function () {
-    return view("course-read");
-});
+Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('course.read');
 
 Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('course.search');
 Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('course.detail');

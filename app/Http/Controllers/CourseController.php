@@ -113,4 +113,15 @@ class CourseController extends Controller
 
         return view('course')->with(['labelTitle' => $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
+
+    public function readCourse(string $slug)
+    {
+        $toRead = Materi::with([
+            'materiCoverGambar', 
+            'opsiMateri', 
+            'komentar', 
+            'penulis'
+        ])->firstOrFail();
+        return response()->json($toRead);
+    }
 }
