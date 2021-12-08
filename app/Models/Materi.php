@@ -53,6 +53,6 @@ class Materi extends Model
     }
 
     public function mengajar() {
-        return $this->belongsTo(Mengajar::class);
+        return $this->hasOne(Mengajar::class);
     }
 }

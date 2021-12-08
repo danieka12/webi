@@ -2,11 +2,10 @@
 
 namespace Database\Factories;
 
-use App\Models\Guru;
-use Helpers\Content;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\DB;
 
-class PenulisFactory extends Factory
+class MengajarFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +16,8 @@ class PenulisFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'foto_profile' => $this->faker->image(),
-            'description' => Content::teacherExampleDescription()
+            'materi_id' => DB::table("materi")->inRandomOrder()->limit(1)->first()->id,
+            'guru_id' => DB::table("guru")->inRandomOrder()->limit(1)->first()->id
         ];
     }
 }

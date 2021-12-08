@@ -26,6 +26,6 @@ class Mengajar extends Model
 
     public function materi()
     {
-        return $this->hasOne(Materi::class);
+        return $this->belongsTo(Materi::class);
     }
 }

@@ -38,13 +38,13 @@ class CourseController extends Controller
     public function detail($slug)
     {
         $courseId = $this->getId($slug);
-        $course = Materi::with(["penulis.guru", "opsiMateri"])->withCount(['gabungMateri as gabung_materi_count' => function ($query) {
+        $course = Materi::with(["penulis.guru.mengajar.materi", "opsiMateri"])->withCount(['gabungMateri as gabung_materi_count' => function ($query) {
             $query->where('konfirmasi_gabung', '=', true);
         }])->where("id", $courseId)->first();
 
 
         $metaData = [
-            'duration' => "2 Jam 30 Menit",
+            'duration' => $course['durasi'],
             'takeBy' => $course['gabung_materi_count'],
             'category' => $this->strLimit($course['opsiMateri']['judul'], 10),
             'content' => $course['konten'],
@@ -54,6 +54,9 @@ class CourseController extends Controller
                 'name' => $course['penulis']['guru']['name'],
                 'description' => $course['penulis']['description'],
                 'profile' => $course['penulis']['foto_profile'],
+                'field' => collect($course['penulis']['guru']['mengajar'])->map(function ($field) {
+                    return $field['materi']['judul'];
+                })
             ],
             'slug' => $slug,
         ];
@@ -100,7 +103,7 @@ class CourseController extends Controller
                     'courseLabel' => $opsiMateri['judul'],
                     'title' => $courseList['judul'],
                     'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.',
-                    'timeToComplete' => '1h 30min',
+                    'timeToComplete' => $courseList['durasi'],
                     'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
                     'hasEnroll' => false
