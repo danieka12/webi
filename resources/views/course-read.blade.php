@@ -21,7 +21,7 @@
 
 
 					<hr>
-					@include('components.readCourse.comments')
+					@include('components.readCourse.comments', ['comments' => $toRead['comments']])
 					<h5>Berikan Komentar Terbaikmu</h5>
 					@include('components.readCourse.comment-form')
 				</div>
