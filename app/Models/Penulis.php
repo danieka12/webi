@@ -34,4 +34,9 @@ class Penulis extends Model
     {
         return $this->hasMany(Komentar::class);
     }
+
+    public function balasKomentar()
+    {
+        return $this->hasMany(BalasKomentar::class);
+    }
 }

@@ -23,6 +23,14 @@ class Content
         ';
     }
 
+    public static function exampleComment() {
+        return '
+        <p>
+        Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue ante.
+    </p>
+        ';
+    }
+
     public static function courseExampleDescription()
     {
         return '<p>Per consequat adolescens ex, cu nibh commune temporibus vim, ad sumo viris <strong>eloquentiam sed</strong>. Mea appareat omittantur eloquentiam ad, nam ei quas oportere democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam, cetero inermis vel ut. An sit illum euismod facilisis, tamquam <strong>vulputate</strong> pertinacia eum at.</p>

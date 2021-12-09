@@ -135,7 +135,6 @@ class CourseController extends Controller
                 "coverImage" => $toRead['materiCoverGambar']['cover'],
             ];;
 
-        // return response()->json($collectionToRead);
         return view('course-read')->with(['toRead' => $collectionToRead]);
     }
 }
