@@ -16,36 +16,36 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     $popularData = [['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'materi/detail/persius-delenit-has-cu', 'hasEnroll' => true], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'materi/detail/persius-delenit-has-cu', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'materi/detail/persius-delenit-has-cu', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'materi/detail/persius-delenit-has-cu', 'hasEnroll' => false], ['courseLabel' => 'category', 'title' => 'Persius delenit has cu', 'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.', 'timeToComplete' => '1h 30min', 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg', 'href' => 'materi/detail/persius-delenit-has-cu', 'hasEnroll' => false]];
-//     $categoryData = [['title' => 'Arts and Humanities', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg'], ['title' => 'Engineering', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg'], ['title' => 'Architecture', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg'], ['title' => 'Science and Biology', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg'], ['title' => 'Law and Criminology', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg'], ['title' => 'Medical', 'metaTitle' => '15 Programmes', 'href' => 'materi/engineering', 'previewImage' => 'http://via.placeholder.com/450x533/ccc/fff/course_1.jpg']];
-//     $newsAndEventData = [['title' => 'Pri oportere scribentur eu', 'desc' => 'Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....', 'author' => 'Mark Twain', 'dateTime' => '20-11-2017', 'href' => '#0', 'meta' => ['imagePreview' => 'http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg', 'date' => 28, 'month' => 'Dec']], ['title' => 'Pri oportere scribentur eu', 'desc' => 'Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....', 'author' => 'Mark Twain', 'dateTime' => '20-11-2017', 'href' => '#0', 'meta' => ['imagePreview' => 'http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg', 'date' => 28, 'month' => 'Dec']], ['title' => 'Pri oportere scribentur eu', 'desc' => 'Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....', 'author' => 'Mark Twain', 'dateTime' => '20-11-2017', 'href' => '#0', 'meta' => ['imagePreview' => 'http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg', 'date' => 28, 'month' => 'Dec']], ['title' => 'Pri oportere scribentur eu', 'desc' => 'Cu eum alia elit, usu in eius appareat, deleniti sapientem honestatis eos ex. In ius esse ullum vidisse....', 'author' => 'Mark Twain', 'dateTime' => '20-11-2017', 'href' => '#0', 'meta' => ['imagePreview' => 'http://via.placeholder.com/500x333/ccc/fff/news_home_1.jpg', 'date' => 28, 'month' => 'Dec']]];
-//     return view('home')->with(['populars' => $popularData, 'categories' => $categoryData, 'newsAndEvents' => $newsAndEventData]);
-// });
-
-
 Route::get("/", [HomepageController::class, 'index'])->name("homepage");
 
-Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('course.read');
-
-Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('course.search');
-Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('course.detail');
-Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('course.join');
-
-Route::get("/guru/detail/{id}", function () {
-    return view('teacher-detail');
-})->name('teacher.profile');
-
-Route::get("/materi/gabung/{slug}", function () {
-    return view('take-course');
+Route::name("course.")->group(function () {
+    Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
+    Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('search');
+    Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail');
+    Route::get("/materi/gabung/{slug}", function () {
+        return view('take-course');
+    })->name('join');
+    Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
 });
 
-Route::get("/login", function () {
-    return view('auth.siswa.login');
+Route::name("teacher.")->group(function () {
+    Route::get("/guru/detail/{id}", function () {
+        return view('teacher-detail');
+    })->name('profile');
 });
 
-Route::get("/daftar", function () {
-    return view('auth.siswa.register');
+Route::name('auth.')->group(function () {
+    Route::get("/login", function () {
+        return view('auth.siswa.login');
+    })->name('login');
+
+    Route::get("/daftar", function () {
+        return view('auth.siswa.register');
+    })->name('register');
+
+    Route::get('/logout', function () {
+        return "Logout";
+    });
 });
 
 Route::get("/tentang-peneliti", function () {

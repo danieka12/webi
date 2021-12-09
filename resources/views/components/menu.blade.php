@@ -30,7 +30,7 @@
                 <li><span><a href="#0">Elang Indra</a></span>
                     <ul>
                         <li><a href="/">Profil Saya</a></li>
-                        <li><a href="/">Logout</a></li>
+                        <li><a href={{ route('auth.logout') }}>Logout</a></li>
                     </ul>
                 </li>
             @endauth
