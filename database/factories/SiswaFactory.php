@@ -15,7 +15,7 @@ class SiswaFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'nis' => $this->faker->randomNumber(4),
+            'nis' => $this->faker->randomNumber(8),
             'name' => $this->faker->name(),
             'password' => $this->faker->sentence(1)
         ];

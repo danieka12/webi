@@ -20,6 +20,10 @@ class CreateBalasKomentarsTable extends Migration
             $table->uuid('siswa_id')->nullable();
             $table->text('konten');
             $table->timestamps();
+
+            $table->foreign('komentar_id')->references('id')->on('komentar')->onDelete('cascade');
+            $table->foreign('penulis_id')->references('id')->on('penulis')->onDelete('cascade');
+            $table->foreign('siswa_id')->references('id')->on('siswa')->onDelete('cascade');
         });
     }
 

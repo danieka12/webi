@@ -11,7 +11,7 @@ class BalasKomentar extends Model
     use HasFactory;
     use Uuid;
 
-    protected $table = 'komentar';
+    protected $table = 'balas_komentar';
     public $incrementing = false;
     public $keyType = 'uuid';
     protected $fillable = [
