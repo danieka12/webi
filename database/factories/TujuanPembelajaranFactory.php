@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Helpers\Content;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,7 @@ class TujuanPembelajaranFactory extends Factory
     {
         return [
             'guru_id' => DB::table("guru")->inRandomOrder()->limit(1)->first()->id,
-            'description' => $this->faker->randomHtml(2, 3)
+            'description' => Content::courseExampleDescription()
         ];
     }
 }

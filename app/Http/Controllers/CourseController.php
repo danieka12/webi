@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GabungMateri;
 use App\Models\Materi;
 use App\Models\OpsiMateri;
-use Error;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -38,7 +38,7 @@ class CourseController extends Controller
     public function detail($slug)
     {
         $courseId = $this->getId($slug);
-        $course = Materi::with(["penulis.guru.mengajar.materi", "opsiMateri"])->withCount(['gabungMateri as gabung_materi_count' => function ($query) {
+        $course = Materi::with(["penulis.guru.mengajar.materi", "opsiMateri", 'tujuanPembelajaran'])->withCount(['gabungMateri as gabung_materi_count' => function ($query) {
             $query->where('konfirmasi_gabung', '=', true);
         }])->where("id", $courseId)->first();
 
@@ -47,7 +47,7 @@ class CourseController extends Controller
             'duration' => $course['durasi'],
             'takeBy' => $course['gabung_materi_count'],
             'category' => $this->strLimit($course['opsiMateri']['judul'], 10),
-            'content' => $course['konten'],
+            'content' => $course['tujuanPembelajaran']['description'],
             'title' => $course['judul'],
             'guru' => [
                 'id' => $course['penulis']['guru']['id'],
@@ -117,11 +117,25 @@ class CourseController extends Controller
     public function readCourse(string $slug)
     {
         $toRead = Materi::with([
-            'materiCoverGambar', 
-            'opsiMateri', 
-            'komentar', 
-            'penulis'
+            'materiCoverGambar',
+            'opsiMateri',
+            'komentar.penulis',
+            'komentar.siswa',
+            'penulis.guru'
         ])->firstOrFail();
-        return response()->json($toRead);
+
+        $collectionToRead =
+            [
+                'title' => $toRead['judul'],
+                'label' => $toRead['opsiMateri']['judul'],
+                'createdAt' => Carbon::parse($toRead['comments'])->format('d/m/Y'),
+                'teacher' => $toRead['penulis']['guru']['name'],
+                'comments' => $toRead['komentar'],
+                'content' => $toRead['konten'],
+                "coverImage" => $toRead['materiCoverGambar']['cover'],
+            ];;
+
+        // return response()->json($collectionToRead);
+        return view('course-read')->with(['toRead' => $collectionToRead]);
     }
 }

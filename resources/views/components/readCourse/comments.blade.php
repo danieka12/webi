@@ -1,5 +1,5 @@
 <div id="comments">
-    <h5>Comments</h5>
+    <h5>Komentar</h5>
     <ul>
         <li>
             <div class="avatar">

@@ -21,7 +21,7 @@ class MateriFactory extends Factory
             'penulis_id' => DB::table("penulis")->inRandomOrder()->limit(1)->first()->id,
             'judul' => $this->faker->sentence(4),
             'durasi' => '1 Jam 30 Menit',
-            'konten' => Content::courseExampleDescription()
+            'konten' => Content::courseExampleRead(),
         ];
     }
 }

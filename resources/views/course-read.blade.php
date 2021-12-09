@@ -1,4 +1,4 @@
-@extends('components.app', ['title' => 'Your blog article title'])
+@extends('components.app', ['title' => $toRead['title']])
 
 @section('content')
 	<main>
@@ -8,13 +8,21 @@
 		<div class="container margin_60_35">
 			<div class="row">
 				<div class="col-lg-12">
-					@include('components.readCourse.post')
+					@include('components.readCourse.post', [
+						'title' => $toRead['title'],
+						'label' => $toRead['label'],
+						'createdAt' => $toRead['createdAt'],
+						'teacher' => $toRead['teacher'],
+						'comments' => count($toRead['comments']),
+						'content' => $toRead['content'],
+						"coverImage" => $toRead['coverImage'],
+					])
 					<!-- /single-post -->
 
 
 					<hr>
 					@include('components.readCourse.comments')
-					<h5>Leave a Comment</h5>
+					<h5>Berikan Komentar Terbaikmu</h5>
 					@include('components.readCourse.comment-form')
 				</div>
 				<!-- /col -->

@@ -21,7 +21,8 @@ class Guru extends Model
     ];
 
     protected $hidden = [
-        'password'
+        'password',
+        'remember_token'
     ];
 
     public function setPasswordAttribute(string $value)
