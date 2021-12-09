@@ -4,6 +4,7 @@
 		{{-- include guru component --}}
 		@include('auth.guru.logo') 
 	  <form>
+		@include('components.miniComponents.message')
 		<div class="form-group">
 			<span class="input">
 			<input class="input_field" type="email" autocomplete="off" name="nis">

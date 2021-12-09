@@ -27,7 +27,7 @@
             <li><span><a href="/tentang-peneliti">Tentang Peneliti</a></span></li>
             
             @auth
-                <li><span><a href="#0">Elang Indra</a></span>
+                <li><span><a href="#0">{{ auth()->user()->name }}</a></span>
                     <ul>
                         <li><a href="/">Profil Saya</a></li>
                         <li><a href={{ route('auth.logout') }}>Logout</a></li>

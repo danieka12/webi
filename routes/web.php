@@ -3,6 +3,7 @@
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\SiswaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,7 @@ Route::name('auth.')->group(function () {
     Route::get("/daftar", function () {
         return view('auth.siswa.register');
     })->name('register');
+    Route::post('/daftar', [SiswaController::class, 'register'])->name('register.post');
 
     Route::get('/logout', function () {
         return "Logout";

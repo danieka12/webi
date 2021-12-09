@@ -24,7 +24,7 @@ class SiswaRegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'nis' => 'required|unique:nis,siswa',
+            'nis' => 'required|unique:siswa,nis',
             'name' => 'required|min:5',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password'

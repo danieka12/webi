@@ -7,6 +7,17 @@
         <div class="row">
             <input type="hidden" name="slug" value={{ $slug }}>
             <input type="hidden" name="userId" value={{ $slug }}>
-        <div style="position:relative;" class="mt-4"><input type="submit" value="Gabung Sekarang" class="btn_1 full-width" id="submit-contact"></div>
+        <div style="position:relative;" class="mt-4">
+      @guest
+      <button type="submit" disabled  class="btn_1 full-width" id="submit-contact">
+           {{ $titleBtn }}
+       </button>   
+      @endguest
+      @auth 
+      <button type="submit"  class="btn_1 full-width" id="submit-contact">
+           {{ $titleBtn }}
+       </button>
+      @endauth
+    </div> 
     </form>
 </div>
