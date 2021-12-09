@@ -21,6 +21,8 @@
 		</div>
 		<a href="#0" class="btn_1 rounded full-width add_top_60">Masuk ke WEBI</a>
 		<div class="text-center add_top_10">Masuk sebagai guru? <strong><a href="register.html">Klik disini</a></strong></div>
+		<div class="divider"><span>Atau</span></div>
+		<div class="text-center add_top_30">Daftar Sebagai Siswa? <strong><a href={{ route('auth.register') }}>Klik disini</a></strong></div>
 	</form>
 	<div class="copy">© 2021 Udema</div>
 </aside>

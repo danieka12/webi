@@ -19,13 +19,18 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [HomepageController::class, 'index'])->name("homepage");
 
 Route::name("course.")->group(function () {
-    Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
+
     Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('search');
     Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail');
     Route::get("/materi/gabung/{slug}", function () {
         return view('take-course');
     })->name('join');
-    Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
+
+    // authenticated route
+    Route::middleware(['auth'])->group(function () {
+        Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
+        Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
+    });
 });
 
 Route::name("teacher.")->group(function () {
@@ -45,7 +50,7 @@ Route::name('auth.')->group(function () {
 
     Route::get('/logout', function () {
         return "Logout";
-    });
+    })->middleware(['auth']);
 });
 
 Route::get("/tentang-peneliti", function () {
