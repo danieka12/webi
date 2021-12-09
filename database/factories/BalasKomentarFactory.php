@@ -15,10 +15,11 @@ class BalasKomentarFactory extends Factory
      */
     public function definition()
     {
+        $isPenulisOrSiswa = boolval($this->faker->numberBetween(0, 1));
         return [
             'id' => $this->faker->uuid(),
-            'penulis_id' => DB::table("penulis")->inRandomOrder()->limit(1)->first()->id,
-            'siswa_id' => DB::table("siswa")->inRandomOrder()->limit(1)->first()->id,
+            'penulis_id' =>  $isPenulisOrSiswa ? DB::table("penulis")->inRandomOrder()->limit(1)->first()->id : null,
+            'siswa_id' => !$isPenulisOrSiswa ? DB::table("siswa")->inRandomOrder()->limit(1)->first()->id : null,
             'konten' => Content::exampleReply()
         ];
     }

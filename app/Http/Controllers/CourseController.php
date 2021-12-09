@@ -35,6 +35,11 @@ class CourseController extends Controller
         return $prefix . Str::slug($slug);
     }
 
+    private function transformDate($date)
+    {
+        return Carbon::parse($date)->format('d/m/Y');
+    }
+
     public function detail($slug)
     {
         $courseId = $this->getId($slug);
@@ -116,25 +121,49 @@ class CourseController extends Controller
 
     public function readCourse(string $slug)
     {
+        $courseId = $this->getId($slug);
         $toRead = Materi::with([
             'materiCoverGambar',
             'opsiMateri',
-            'komentar.penulis',
+            'komentar.penulis.guru',
             'komentar.siswa',
+            'komentar.balasKomentar',
+            'komentar.balasKomentar.penulis.guru',
+            'komentar.balasKomentar.siswa',
             'penulis.guru'
-        ])->firstOrFail();
+        ])->where("id", $courseId)->firstOrFail();
 
         $collectionToRead =
             [
                 'title' => $toRead['judul'],
                 'label' => $toRead['opsiMateri']['judul'],
-                'createdAt' => Carbon::parse($toRead['comments'])->format('d/m/Y'),
+                'createdAt' => $this->transformDate($toRead['comments']),
                 'teacher' => $toRead['penulis']['guru']['name'],
-                'comments' => $toRead['komentar'],
+                'comments' => collect($toRead['komentar'])->map(function ($comment) {
+                    return [
+                        'id' => $comment['id'],
+                        'author' => isset($comment['penulis']) ? $comment['penulis']['guru']['name'] : $comment['siswa']['name'],
+                        'author_id' => isset($comment['penulis']) ? $comment['penulis']['id'] : $comment['siswa']['id'],
+                        'role' => isset($comment['penulis']) ? 'teacher' : 'student',
+                        'content' => $comment['konten'],
+                        'postAt' => $this->transformDate($comment['created_at']),
+                        'reply' => collect($comment['balasKomentar'])->map(function ($reply) {
+                            return [
+                                'id' => $reply['id'],
+                                'author' => isset($reply['penulis']) ? $reply['penulis']['guru']['name'] : $reply['siswa']['name'],
+                                'author_id' => isset($reply['penulis']) ? $reply['penulis']['id'] : $reply['siswa']['id'],
+                                'role' => isset($reply['penulis']) ? 'teacher' : 'student',
+                                'content' => $reply['konten'],
+                                'postAt' => $this->transformDate($reply['created_at']),
+                            ];
+                        })
+                    ];
+                }),
                 'content' => $toRead['konten'],
                 "coverImage" => $toRead['materiCoverGambar']['cover'],
-            ];;
+            ];
 
+        // return  response()->json($collectionToRead);
         return view('course-read')->with(['toRead' => $collectionToRead]);
     }
 }
