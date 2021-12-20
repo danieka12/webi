@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get("/", [HomepageController::class, 'index'])->name("homepage");
 
 Route::name("course.")->group(function () {
@@ -28,7 +29,7 @@ Route::name("course.")->group(function () {
     })->name('join');
 
     // authenticated route
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['siswa'])->group(function () {
         Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
         Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
     });
@@ -52,7 +53,7 @@ Route::name('auth.')->group(function () {
 
     Route::get('/logout', function () {
         return "Logout";
-    })->middleware(['auth']);
+    })->middleware(['siswa']);
 });
 
 Route::get("/tentang-peneliti", function () {
@@ -90,7 +91,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
 | Protecting Route
 |--------------------------------------------------------------------------
 */
-    Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ['guru']], function () {
         /**
          * Logout Routes
          */

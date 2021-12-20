@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'guru',
+        ],
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'siswa',
+        ]
     ],
 
     /*
@@ -69,6 +77,16 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        'guru' => [
+            'driver' => 'database',
+            'table' => 'guru',
+        ],
+
+        'siswa' => [
+            'driver' => 'database',
+            'table' => 'siswa',
+        ],
     ],
 
     /*
