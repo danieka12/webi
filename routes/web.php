@@ -45,15 +45,14 @@ Route::name('auth.')->group(function () {
     Route::get("/login", function () {
         return view('auth.siswa.login');
     })->name('login');
-
+    Route::post('/login', [SiswaController::class, 'login'])->name('login.post');
+    
     Route::get("/daftar", function () {
         return view('auth.siswa.register');
     })->name('register');
     Route::post('/daftar', [SiswaController::class, 'register'])->name('register.post');
-
-    Route::get('/logout', function () {
-        return "Logout";
-    })->middleware(['siswa']);
+    
+    Route::get('/logout', [SiswaController::class, 'perform'])->name('logout');
 });
 
 Route::get("/tentang-peneliti", function () {

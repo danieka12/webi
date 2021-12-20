@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SiswaLoginRequest;
 use App\Http\Requests\SiswaRegisterRequest;
 use App\Models\Siswa;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class SiswaController extends Controller
@@ -17,7 +18,7 @@ class SiswaController extends Controller
         if (!Auth::guard('siswa')->attempt(['nis' => $siswa->nis, 'password' => $request->input('password')])) {
             return redirect()->back()->withInput($request->only('nis', 'name'));
         }
-        return redirect()->intended(route('homepage'));
+        return $this->authenticated($request, $siswa);
     }
 
     public function username()
@@ -32,20 +33,13 @@ class SiswaController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    public function login(SiswaRegisterRequest $request)
+    public function login(SiswaLoginRequest $request)
     {
-        $credentials = $request->getCredentials();
-
-        if (!Auth::validate($credentials)) :
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
-        endif;
-
-        $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
-        Auth::login($user);
-
-        return $this->authenticated($request, $user);
+        $credentials = $request->only('nis', 'password');
+        if (!Auth::guard('siswa')->attempt($credentials)) {
+            return redirect()->back()->withInput($request->only('nis', 'name'));
+        }
+        return $this->authenticated($request);
     }
 
     /**
@@ -56,15 +50,15 @@ class SiswaController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    protected function authenticated(SiswaRegisterRequest $request, $user)
+    protected function authenticated(FormRequest $request, $user = "")
     {
-        return redirect()->intended();
+        return redirect()->intended(route('homepage'));
     }
 
     public function perform()
     {
         Session::flush();
-        Auth::logout();
-        return redirect('login');
+        Auth::guard('siswa')->logout();
+        return redirect()->to(route('homepage'));
     }
 }
