@@ -7,7 +7,7 @@
 	<div class="container-fluid">
 		<!-- Breadcrumbs-->
 		@include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Tambah Materi'])
-		<input type="hidden" name="penulisId" value="1" />
+		<input type="hidden" name="penulisId" value="1bdc94e9-82c0-4999-813b-50667762cbe9" />
 		  <div class="box_general padding_bottom">
 			  <div class="header_box version_2">
 				  <h2><i class="fa fa-file"></i>Tambah Materi Yang Akan Diajarkan</h2>

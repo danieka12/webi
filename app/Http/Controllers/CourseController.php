@@ -184,7 +184,7 @@ class CourseController extends Controller
         $courseModel->save();
 
         $courseMeta['materi_id'] = $courseModel->id;
-        $courseMeta['guru_id'] = Penulis::find($course['penulisId'])->guruId;
+        $courseMeta['guru_id'] = Penulis::find($course['penulisId'])['guru_id'];
         $courseMeta->description = $course['description'];
         $courseMeta->save();
     }
