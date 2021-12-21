@@ -92,7 +92,15 @@ Route::prefix("guru")->name('guru.')->group(function () {
 */
     Route::get("/", function () {
         return view('admin.dashboard');
-    });
+    })->name("dashboard");
+
+    Route::get("/konfirmasi", function () {
+        return view("admin.confirm-student");
+    })->name("confirmStudent");
+
+    Route::get("/materi", function () {
+        return view('admin.course');
+    })->name("course");
 
     Route::middleware(['auth:guru'])->group(function () {
         /**

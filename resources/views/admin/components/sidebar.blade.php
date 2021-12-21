@@ -1,26 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html"><img src={{ asset("images/admin/logo.png") }} data-retina="true" alt="" width="163" height="36"></a>
+    <a class="navbar-brand" href="{{ route('guru.dashboard') }}"><img src={{ asset("images/admin/logo.png") }} data-retina="true" alt="" width="163" height="36"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
     <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{ route('guru.dashboard') }}">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Home</span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Bookings">
-        <a class="nav-link" href="courses.html">
+        <a class="nav-link" href={{ route('guru.course') }}>
             <i class="fa fa-fw fa-archive"></i>
-            <span class="nav-link-text">Materi <span class="badge badge-pill badge-primary">6 New</span></span>
+            <span class="nav-link-text">Materi</span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
-        <a class="nav-link" href="reviews.html">
+        <a class="nav-link" href={{ route("guru.confirmStudent") }}>
             <i class="fa fa-fw fa-star"></i>
-            <span class="nav-link-text">Konfirmasi Siswa</span>
+            <span class="nav-link-text">Konfirmasi Siswa <span class="badge badge-pill badge-primary">6 Baru</span></span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
