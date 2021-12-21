@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
-     @include('admin.components.miniComponents.breadcrumbs')
+     @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Edit Profil'])
 		<div class="box_general padding_bottom">
 			<div class="header_box version_2">
 				<h2><i class="fa fa-file"></i>Edit Profil Guru</h2>
