@@ -19,27 +19,24 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
         <a class="nav-link" href={{ route("guru.confirmStudent") }}>
-            <i class="fa fa-fw fa-star"></i>
+            <i class="fa fa-fw fa-check"></i>
             <span class="nav-link-text">Konfirmasi Siswa <span class="badge badge-pill badge-primary">6 Baru</span></span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">
-        <a class="nav-link" href="add-listing.html">
+        <a class="nav-link" href={{ route("guru.addCourse") }}>
             <i class="fa fa-fw fa-plus-circle"></i>
             <span class="nav-link-text">Tambah Materi</span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="My profile">
         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseProfile" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Profil Guru</span>
+            <i class="fa fa-fw fa-graduation-cap"></i>
+            <span class="nav-link-text">Guru</span>
         </a>
         <ul class="sidenav-second-level collapse" id="collapseProfile">
             <li>
-            <a href="user-profile.html">User profile</a>
-            </li>
-            <li>
-            <a href="teacher-profile.html">Teacher profile</a>
+            <a href={{ route('guru.teacher') }}>Profil Guru</a>
             </li>
         </ul>
         </li>

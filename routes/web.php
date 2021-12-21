@@ -102,6 +102,14 @@ Route::prefix("guru")->name('guru.')->group(function () {
         return view('admin.course');
     })->name("course");
 
+    Route::get("/materi/tambah", function () {
+        return view("admin.add-course");
+    })->name("addCourse");
+
+    Route::get("/profil", function () {
+        return view('admin.teacher');
+    })->name("teacher");
+
     Route::middleware(['auth:guru'])->group(function () {
         /**
          * Logout Routes
