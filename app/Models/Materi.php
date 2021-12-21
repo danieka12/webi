@@ -18,7 +18,8 @@ class Materi extends Model
         "opsi_materi_id",
         "penulis_id",
         "judul",
-        "konten"
+        "durasi",
+        "konten",
     ];
 
 

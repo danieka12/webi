@@ -111,6 +111,8 @@ Route::prefix("guru")->name('guru.')->group(function () {
         return view('admin.teacher');
     })->name("teacher");
 
+    Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
+
     Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
 
     Route::middleware(['auth:guru'])->group(function () {

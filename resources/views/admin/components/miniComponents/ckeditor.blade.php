@@ -1,4 +1,4 @@
-<textarea class="ckeditor form-control" name="wysiwyg-editor"></textarea>
+<textarea class="ckeditor form-control" name={{ $name }}></textarea>
 
 @push('scripts')
 <script src={{ asset('vendor/ckeditor/ckeditor.js') }}></script>

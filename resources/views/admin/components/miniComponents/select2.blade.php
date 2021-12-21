@@ -1,4 +1,4 @@
-<select class="livesearch form-control" name="livesearch"></select>
+<select class="livesearch form-control" name={{ $name }}></select>
 
 @push('styles')
 <link href={{ asset("vendor/select2/css/select2.min.css") }} rel="stylesheet" />
@@ -8,9 +8,9 @@
 <script src={{ asset("vendor/select2/js/select2.min.js") }}></script>
 <script type="text/javascript">
     $('.livesearch').select2({
-        placeholder: 'Pilih Kategori Materi',
+        placeholder: "{{ $placeholder }}",
         ajax: {
-            url: "{{ route('guru.categories') }}",
+            url: "{{ $route }}",
             dataType: 'json',
             delay: 250,
             processResults: function (data) {

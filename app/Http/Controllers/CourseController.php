@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CourseRequest;
 use App\Models\GabungMateri;
 use App\Models\Materi;
 use App\Models\OpsiMateri;
+use App\Models\Penulis;
+use App\Models\TujuanPembelajaran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -165,5 +168,24 @@ class CourseController extends Controller
 
         // return  response()->json($collectionToRead);
         return view('course-read')->with(['toRead' => $collectionToRead]);
+    }
+
+    public function create(CourseRequest $request)
+    {
+        $course = $request->validated();
+        $courseModel = new Materi;
+        $courseMeta = new TujuanPembelajaran;
+
+        $courseModel['opsi_materi_id'] = $course['categoryId'];
+        $courseModel['penulis_id'] = $course['penulisId'];
+        $courseModel->durasi = $course['durationHour']  . " Jam " . $course['durationMinute'] . " Menit";
+        $courseModel->judul = $course['title'];
+        $courseModel->konten = $course['content'];
+        $courseModel->save();
+
+        $courseMeta['materi_id'] = $courseModel->id;
+        $courseMeta['guru_id'] = Penulis::find($course['penulisId'])->guruId;
+        $courseMeta->description = $course['description'];
+        $courseMeta->save();
     }
 }
