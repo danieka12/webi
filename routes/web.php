@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryCourseController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
@@ -109,6 +110,8 @@ Route::prefix("guru")->name('guru.')->group(function () {
     Route::get("/profil", function () {
         return view('admin.teacher');
     })->name("teacher");
+
+    Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
 
     Route::middleware(['auth:guru'])->group(function () {
         /**
