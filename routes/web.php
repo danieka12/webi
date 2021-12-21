@@ -46,12 +46,12 @@ Route::name('auth.')->group(function () {
         return view('auth.siswa.login');
     })->name('login');
     Route::post('/login', [SiswaController::class, 'login'])->name('login.post');
-    
+
     Route::get("/daftar", function () {
         return view('auth.siswa.register');
     })->name('register');
     Route::post('/daftar', [SiswaController::class, 'register'])->name('register.post');
-    
+
     Route::get('/logout', [SiswaController::class, 'perform'])->name('logout');
 });
 
@@ -90,7 +90,11 @@ Route::prefix("guru")->name('guru.')->group(function () {
 | Protecting Route
 |--------------------------------------------------------------------------
 */
-    Route::group(['middleware' => ['guru']], function () {
+    Route::get("/", function () {
+        return view('admin.dashboard');
+    });
+
+    Route::middleware(['auth:guru'])->group(function () {
         /**
          * Logout Routes
          */
