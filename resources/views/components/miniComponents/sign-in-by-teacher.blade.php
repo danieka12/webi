@@ -1,0 +1,1 @@
+<div class="text-center add_top_10">Masuk sebagai guru? <strong><a href={{ route("guru.login.show") }}>Klik disini</a></strong></div>

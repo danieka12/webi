@@ -49,12 +49,9 @@ jQuery(document).ready(function () {
             $.post(
                 action,
                 {
-                    name_contact: $("#name_contact").val(),
-                    lastname_contact: $("#lastname_contact").val(),
-                    email_contact: $("#email_contact").val(),
-                    phone_contact: $("#phone_contact").val(),
-                    message_contact: $("#message_contact").val(),
-                    verify_contact: $("#verify_contact").val(),
+                    _token: $('meta[name="csrf-token"]').attr("content"),
+                    slug: $("#slug").val(),
+                    user_id: $("#user_id").val(),
                 },
                 function (data) {
                     document.getElementById("message-contact").innerHTML = data;

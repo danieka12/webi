@@ -22,7 +22,7 @@
 			</span>
 		</div>
 		<button type="submit" class="btn_1 rounded full-width add_top_60">Masuk ke WEBI</button>
-		<div class="text-center add_top_10">Masuk sebagai guru? <strong><a href="register.html">Klik disini</a></strong></div>
+		@include('components.miniComponents.sign-in-by-teacher')
 		<div class="divider"><span>Atau</span></div>
 		<div class="text-center add_top_30">Daftar Sebagai Siswa? <strong><a href={{ route('auth.register') }}>Klik disini</a></strong></div>
 	</form>

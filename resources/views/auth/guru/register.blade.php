@@ -37,7 +37,7 @@
 			<div id="pass-info" class="clearfix"></div>
 		</div>
 		<a href="#0" class="btn_1 rounded full-width add_top_30">Daftar WEBI (Guru) Sekarang</a>
-		<div class="text-center add_top_10">Masuk sebagai guru? <strong><a href="register.html">Klik disini</a></strong></div>
+		@include('components.miniComponents.sign-in-by-teacher')
 		@include('components.copyright')
 	</form>
 </aside>

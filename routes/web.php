@@ -30,7 +30,7 @@ Route::name("course.")->group(function () {
     })->name('join');
 
     // authenticated route
-    Route::middleware(['siswa'])->group(function () {
+    Route::middleware(['auth:siswa'])->group(function () {
         Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
         Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
     });
@@ -82,7 +82,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
         /**
          * Login Routes
          */
-        Route::get('/login', [GuruAuthController::class, 'showLogin'])->name('login.show');
+        Route::get('/masuk', [GuruAuthController::class, 'showLogin'])->name('login.show');
         Route::post('/login', [GuruAuthController::class, 'login'])->name('login.perform');
     });
 

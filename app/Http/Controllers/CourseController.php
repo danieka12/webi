@@ -76,20 +76,27 @@ class CourseController extends Controller
     {
         $validated = $request->validate([
             'slug' => 'required',
-            'userId' => 'required',
+            'user_id' => 'required',
         ]);
+
+
 
         $joinCourse = new GabungMateri;
         $courseId = $this->getId($validated['slug']);
-        $guruId = Materi::with('penulis')->where("id", '=', $courseId)->first()['guru_id'];
+        $guruId = Materi::with('penulis.guru')->where("id", '=', $courseId)->first()['penulis']['guru']['id'];
 
-        $joinCourse->guruId = $guruId;
-        $joinCourse->siswaId = $validated['userId'];
-        $joinCourse->materiId = $courseId;
-        $joinCourse->konfirmasiGabung = false;
+        // check if this user has been joined before
+        if (!empty(GabungMateri::where('materi_id',  $courseId)->where("siswa_id", $validated['user_id'])->first())) {
+            return response()->json(["success" => false, "msg" => "Anda sudah mengambil materi ini"], 400);
+        }
+
+        $joinCourse['guru_id'] = $guruId;
+        $joinCourse['siswa_id'] = $validated['user_id'];
+        $joinCourse['materi_id'] = $courseId;
+        $joinCourse['konfirmasi_gabung'] = false;
         $joinCourse->save();
 
-        return view('course-detail')->with(['hasJoin' => false]);
+        return response()->json(["success" => true, "joined" => true]);
     }
 
     public function filterCourseByLabel(string $label)
