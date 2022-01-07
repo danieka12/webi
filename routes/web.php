@@ -91,31 +91,32 @@ Route::prefix("guru")->name('guru.')->group(function () {
 | Protecting Route
 |--------------------------------------------------------------------------
 */
-    Route::get("/", function () {
-        return view('admin.dashboard');
-    })->name("dashboard");
-
-    Route::get("/konfirmasi", function () {
-        return view("admin.confirm-student");
-    })->name("confirmStudent");
-
-    Route::get("/materi", function () {
-        return view('admin.course');
-    })->name("course");
-
-    Route::get("/materi/tambah", function () {
-        return view("admin.add-course");
-    })->name("addCourse");
-
-    Route::get("/profil", function () {
-        return view('admin.teacher');
-    })->name("teacher");
-
-    Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
-
-    Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
 
     Route::middleware(['auth:guru'])->group(function () {
+        Route::get("/", function () {
+            return view('admin.dashboard');
+        })->name("dashboard");
+
+        Route::get("/konfirmasi", function () {
+            return view("admin.confirm-student");
+        })->name("confirmStudent");
+
+        Route::get("/materi", function () {
+            return view('admin.course');
+        })->name("course");
+
+        Route::get("/materi/tambah", function () {
+            return view("admin.add-course");
+        })->name("addCourse");
+
+        Route::get("/profil", function () {
+            return view('admin.teacher');
+        })->name("teacher");
+
+        Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
+
+        Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
+
         /**
          * Logout Routes
          */

@@ -16,7 +16,7 @@ class Guru extends Authenticatable
     public $keyType = 'uuid';
     protected $fillable = [
         "email",
-        "nama",
+        "name",
         "password"
     ];
 

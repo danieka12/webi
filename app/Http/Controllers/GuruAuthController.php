@@ -7,7 +7,7 @@ use App\Models\Guru;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
-
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +29,10 @@ class GuruAuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $guru = Guru::create($request->validated());
-        Auth::login($guru);
-        return redirect('/')->with('success', "Account successfully registered.");
+        if (!Auth::guard('guru')->attempt(['email' => $guru->email, 'password' => $request->input('password')])) {
+            return redirect()->back()->withInput($request->only('email', 'name'));
+        }
+        return redirect()->route("guru.dashboard")->with('success', "Account successfully registered.");
     }
 
     public function showLogin()
@@ -50,13 +52,10 @@ class GuruAuthController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = $request->getCredentials();
-        if (!Auth::validate($credentials)) :
-            return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
-        endif;
-        $guru = Auth::getProvider()->retrieveByCredentials($credentials);
-        Auth::login($guru);
-        return $this->authenticated($request, $guru);
+        if (!Auth::guard('guru')->attempt($credentials)) {
+            return redirect()->back()->withInput($request->only('email'));
+        }
+        return $this->authenticated($request);
     }
 
 
@@ -68,7 +67,7 @@ class GuruAuthController extends Controller
      * 
      * @return \Illuminate\Http\Response
      */
-    protected function authenticated(Request $request, $guru)
+    protected function authenticated(FormRequest $request, $user = "")
     {
         return redirect()->intended();
     }
