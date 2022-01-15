@@ -1,9 +1,9 @@
 <li>
     <span>{{ $dateTime }}</span>
     <figure><img src={{ asset($cover) }} alt=""></figure>
-    <h4>{{ $title }}</h4>
-   <div style="height: 9rem; overflow: hidden">
-    <p>{!! $description !!}</p>
+    <h4 class="text-capitalize">{{ $title }}</h4>
+   <div style="height: 7rem; overflow: hidden">
+    <div>{!! $description !!}</div>
    </div>
     <div class="d-flex align-items-center justify-content-between">
         <div class="inline-popups d-flex mb-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GabungMateri;
 use App\Models\Guru as ModelsGuru;
 use App\Models\Materi;
 use App\Models\Penulis;
@@ -24,6 +25,31 @@ class GuruController extends Controller
     private function transformDate($date)
     {
         return Carbon::parse($date)->format('d/m/Y');
+    }
+
+    public function confirmStudent()
+    {
+        $teacherId = Auth::guard("guru")->user()->id;
+        $confirmStudents = GabungMateri::query()->with([
+            "materi.opsiMateri",
+            "materi.materiCoverGambar",
+            "siswa"
+        ])->where("guru_id", $teacherId)->orderBy("konfirmasi_gabung", "asc")->get();
+        // return response()->json($confirmStudents);
+        return view("admin.confirm-student")->with(['confirmStudents' => collect($confirmStudents)->map(function ($confirmStudent) {
+            return [
+                'id' => $confirmStudent->id,
+                'title' => $confirmStudent->siswa->name,
+                'cover' =>  $confirmStudent->materi->materiCoverGambar->cover,
+                'nis' => $confirmStudent->siswa->nis,
+                'joinDate' => $this->transformDate($confirmStudent->createdAt),
+                'category' => $confirmStudent->materi->opsiMateri->judul,
+                'course' => [
+                    'title' => $confirmStudent->materi->judul,
+                    'description' => $confirmStudent->materi->konten
+                ]
+            ];
+        })]);
     }
 
     public function listCourse()

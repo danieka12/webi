@@ -57,7 +57,6 @@ class CourseController extends Controller
             $query->where('konfirmasi_gabung', '=', true);
         }])->where("id", $courseId)->first();
 
-
         $metaData = [
             'duration' => $course['durasi'],
             'takeBy' => $course['gabung_materi_count'],
@@ -73,7 +72,9 @@ class CourseController extends Controller
                     return $field['materi']['judul'];
                 })
             ],
-            'hasTaken' => $user ? GabungMateri::query()->where("siswaId", $user) : $user,
+            'hasTaken' => $user ? !is_null(GabungMateri::query()
+                ->where("siswa_id", $user)
+                ->where("materi_id", $course->id)->first()) : $user,
             'slug' => $slug,
         ];
 

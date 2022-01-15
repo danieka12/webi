@@ -10,7 +10,7 @@
     <h4 class="text-center">Gabung Materi</h4>
     <p class="nopadding">Tekan tombol Gabung Sekarang untuk bisa membaca materi secara lengkap.</p>
     <div id="message-contact"></div>
-    <form id="contactform" autocomplete="off">
+    <form id="contactform" method="POST" action={{route('course.join.post')}} autocomplete="off">
         <div class="row">
             <input type="hidden" id="slug" name="slug" value={{ $slug }}>
             @if(Auth::guard('siswa')->user())

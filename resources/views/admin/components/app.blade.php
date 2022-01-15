@@ -3,7 +3,7 @@
     @include('admin.components.header')
     <body class="fixed-nav sticky-footer" id="page-top">
     <!-- Navigation-->
-   @include('admin.components.sidebar')
+   @include('admin.components.sidebar', ['sizeConfirm' => 0])
     <!-- /Navigation-->
         @yield('body')
         <!-- /.container-wrapper-->

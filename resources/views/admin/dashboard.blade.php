@@ -1,4 +1,4 @@
-@extends('admin.components.app')
+@extends('admin.components.app', ['sizeConfirm', $sizeConfirm ?? 0])
 
 @section('body')
 <div class="content-wrapper">

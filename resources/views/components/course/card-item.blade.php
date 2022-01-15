@@ -6,8 +6,8 @@
     </a>
 </figure>
 <div class="wrapper wrapper-popular">
-    <small>{{ $courseLabel }}</small>
-    <h3>{{ $title }}</h3>
+    <small class="text-capitalize">{{ $courseLabel }}</small>
+    <h3 class="text-capitalize">{{ $title }}</h3>
     <div class="wrapper-body">{!! $desc !!}</div>
 
 </div>

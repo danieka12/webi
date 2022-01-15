@@ -20,7 +20,12 @@
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reviews">
         <a class="nav-link" href={{ route("guru.confirmStudent") }}>
             <i class="fa fa-fw fa-check"></i>
-            <span class="nav-link-text">Konfirmasi Siswa <span class="badge badge-pill badge-primary">6 Baru</span></span>
+            <span class="nav-link-text">Konfirmasi Siswa
+                @if ($sizeConfirm > 0)
+                <span class="badge badge-pill badge-primary">{{ $sizeConfirm }} Baru</span>
+                @endif
+
+            </span>
         </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Add listing">

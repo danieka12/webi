@@ -6,6 +6,7 @@ use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GuruController;
+use App\Models\GabungMateri;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,12 +96,11 @@ Route::prefix("guru")->name('guru.')->group(function () {
 
     Route::middleware(['auth:guru'])->group(function () {
         Route::get("/", function () {
-            return view('admin.dashboard');
+            $sizeOfNewConfirm = GabungMateri::query()->where("konfirmasi_gabung", 0)->get();
+            return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm)]);
         })->name("dashboard");
 
-        Route::get("/konfirmasi", function () {
-            return view("admin.confirm-student");
-        })->name("confirmStudent");
+        Route::get("/konfirmasi", [GuruController::class, "confirmStudent"])->name("confirmStudent");
 
         Route::get("/materi/tambah", function () {
             return view("admin.add-course");
