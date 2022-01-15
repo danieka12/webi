@@ -8,7 +8,6 @@ use App\Models\Guru;
 use App\Models\Materi;
 use App\Models\MateriCoverGambar;
 use App\Models\OpsiMateri;
-use App\Models\Penulis;
 use App\Models\TujuanPembelajaran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
