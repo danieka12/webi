@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseRequest;
 use App\Models\GabungMateri;
+use App\Models\Guru;
 use App\Models\Materi;
+use App\Models\MateriCoverGambar;
 use App\Models\OpsiMateri;
 use App\Models\Penulis;
 use App\Models\TujuanPembelajaran;
@@ -15,6 +17,9 @@ use Illuminate\Support\Str;
 
 class CourseController extends Controller
 {
+
+    private $locationImage = "images/upload";
+
     private function getId(string $params)
     {
         return explode(".", $params)[1];
@@ -149,9 +154,9 @@ class CourseController extends Controller
     public function uploadImage(Request $request)
     {
         $image = $request->file('file');
-        $imageName = time().'.'.$image->extension();
-        $image->move(public_path('images/upload'),$imageName);
-        return response()->json(['success'=>$imageName]);
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path($this->locationImage), $imageName);
+        return response()->json(['success' => $imageName]);
     }
 
     public function readCourse(string $slug)
@@ -198,7 +203,6 @@ class CourseController extends Controller
                 "coverImage" => $toRead['materiCoverGambar']['cover'],
             ];
 
-        // return  response()->json($collectionToRead);
         return view('course-read')->with(['toRead' => $collectionToRead]);
     }
 
@@ -207,17 +211,23 @@ class CourseController extends Controller
         $course = $request->validated();
         $courseModel = new Materi;
         $courseMeta = new TujuanPembelajaran;
+        $materiCoverGambar = new MateriCoverGambar;
 
-        $courseModel['opsi_materi_id'] = $course['categoryId'];
-        $courseModel['penulis_id'] = $course['penulisId'];
+
+        $courseModel['opsi_materi_id'] = $request->categoryId;
+        $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
         $courseModel->durasi = $course['durationHour']  . " Jam " . $course['durationMinute'] . " Menit";
         $courseModel->judul = $course['title'];
         $courseModel->konten = $course['content'];
         $courseModel->save();
 
         $courseMeta['materi_id'] = $courseModel->id;
-        $courseMeta['guru_id'] = Penulis::find($course['penulisId'])['guru_id'];
+        $courseMeta['guru_id'] = $request->guruId;
         $courseMeta->description = $course['description'];
         $courseMeta->save();
+
+        $materiCoverGambar['materi_id'] = $courseModel->id;
+        $materiCoverGambar->cover = $this->locationImage  . "/" . $request->image;
+        $materiCoverGambar->save();
     }
 }

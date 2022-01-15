@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // model
 use App\Models\Guru;
+use App\Models\Penulis;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -32,6 +33,12 @@ class GuruAuthController extends Controller
         if (!Auth::guard('guru')->attempt(['email' => $guru->email, 'password' => $request->input('password')])) {
             return redirect()->back()->withInput($request->only('email', 'name'));
         }
+        
+        // create penulis for teachers
+        $penulis = new Penulis();
+        $penulis['guru_id'] = $guru->id;
+        $penulis->save();
+        
         return redirect()->route("guru.dashboard")->with('success', "Account successfully registered.");
     }
 

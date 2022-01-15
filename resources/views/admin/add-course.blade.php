@@ -1,6 +1,7 @@
 @extends('admin.components.app')
 
 @section('body')
+
 <div class="content-wrapper">
 	<!-- Breadcrumbs-->
 	@include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Tambah Materi'])
@@ -22,8 +23,8 @@
   <form action={{ route('guru.course.create') }} method="POST">
 	@csrf
 	<div class="container-fluid">
-		
-		<input type="hidden" name="penulisId" value="1bdc94e9-82c0-4999-813b-50667762cbe9" />
+		<input name="image" type="hidden" value="" class="image-upload-value">
+		<input type="hidden" name="guruId" value={{ Auth::guard("guru")->user()->id }} />
 		  <div class="box_general padding_bottom">
 			  <div class="header_box version_2">
 				  <h2><i class="fa fa-file"></i>Tambah Materi Yang Akan Diajarkan</h2>
@@ -99,4 +100,16 @@
 @push('scripts')
 	<!-- Custom scripts for this page-->
 	<script src={{ asset("js/admin/vendor/dropzone.min.js") }}></script>
+	<script>
+	Dropzone.autoDiscover = false;
+       var myDropzone = new Dropzone(".dropzone",{ 
+            maxFilesize: 2, // 2 mb
+            acceptedFiles: ".jpeg,.jpg,.png,.pdf",
+       });
+       myDropzone.on("success", function(file, response) {
+            if(response.success){ // Result
+                  $(".image-upload-value").val(response.success)
+            }
+       });
+	</script>
 @endpush

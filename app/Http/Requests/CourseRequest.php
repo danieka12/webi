@@ -24,13 +24,14 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         return [
-            'penulisId' => 'required',
+            'guruId' => 'required',
             'categoryId' => 'required',
             'title' => 'required',
             'durationHour' => 'required',
             'durationMinute' => 'required',
             'description' => 'required',
-            'content' => 'required'
+            'content' => 'required',
+            'image' => 'required',
         ];
     }
 }
