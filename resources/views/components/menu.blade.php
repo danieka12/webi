@@ -1,7 +1,7 @@
 <header class="header menu_2">
     <div id="preloader"><div data-loader="circle-side"></div></div><!-- /Preload -->
     <div id="logo">
-        <a href="/"><img src={{ asset("images/logo.png") }} width="149" height="42" alt=""></a>
+        <a href="/"><img src="https://cdn.discordapp.com/attachments/922461878729453572/931814641506598972/Desain_tanpa_judul_10.png" width="180" height="50" alt=""></a>
     </div>
    @include('components.miniComponents.top-menu')
     <!-- /top_menu -->

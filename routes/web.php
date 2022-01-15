@@ -114,7 +114,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
         })->name("teacher");
 
         Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
-
+        Route::post("/image-upload", [CourseController::class, 'uploadImage'])->name('course.uploadImage');
         Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
 
         /**

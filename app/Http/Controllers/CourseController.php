@@ -146,6 +146,14 @@ class CourseController extends Controller
         return view('course')->with(['labelTitle' => !isset($opsiMateri['judul']) ? "Semua" : $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
 
+    public function uploadImage(Request $request)
+    {
+        $image = $request->file('file');
+        $imageName = time().'.'.$image->extension();
+        $image->move(public_path('images/upload'),$imageName);
+        return response()->json(['success'=>$imageName]);
+    }
+
     public function readCourse(string $slug)
     {
         $courseId = $this->getId($slug);

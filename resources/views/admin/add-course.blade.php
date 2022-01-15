@@ -2,11 +2,27 @@
 
 @section('body')
 <div class="content-wrapper">
-  <form action={{ route('guru.course.create') }} method="POST" enctype="multipart/form-data">
+	<!-- Breadcrumbs-->
+	@include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Tambah Materi'])
+
+	<div class="col-md-12">
+		<div class="box_general padding_bottom">
+			<div class="header_box version_2">
+				<h2><i class="fa fa-file"></i>Upload Cover Gambar Materi</h2>
+			</div>
+			<div class="form-group">
+				<label>Your photo</label>
+					<form action={{ route('guru.course.uploadImage') }} class="dropzone">
+					@csrf
+				</form>
+				</div>
+			<!-- /row-->
+		</div>
+	</div>
+  <form action={{ route('guru.course.create') }} method="POST">
 	@csrf
 	<div class="container-fluid">
-		<!-- Breadcrumbs-->
-		@include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Tambah Materi'])
+		
 		<input type="hidden" name="penulisId" value="1bdc94e9-82c0-4999-813b-50667762cbe9" />
 		  <div class="box_general padding_bottom">
 			  <div class="header_box version_2">
@@ -44,6 +60,7 @@
 			  <div class="header_box version_2">
 				  <h2><i class="fa fa-file-text"></i>Deskripsi Materi</h2>
 			  </div>
+			 
 			  <div class="row">
 				  <div class="col-md-12">
 					  <div class="form-group">
@@ -70,6 +87,16 @@
 		  <p><button type="submit" class="btn_1 medium">Simpan Materi</button></p>
 		</div>
   </form>
+  
 	  <!-- /.container-fluid-->
    	</div>
 @endsection
+
+@push('styles')
+	<link href={{ asset("js/admin/vendor/dropzone.css") }} rel="stylesheet">
+@endpush
+
+@push('scripts')
+	<!-- Custom scripts for this page-->
+	<script src={{ asset("js/admin/vendor/dropzone.min.js") }}></script>
+@endpush
