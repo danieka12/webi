@@ -193,6 +193,11 @@ body {
   text-overflow: ellipsis;
 }
 
+.body-wrapper-description-admin {
+  height: 3rem;
+  overflow: hidden;
+}
+
 #menu.fake_menu {
   display: none !important;
   visibility: hidden !important;

@@ -206,6 +206,17 @@ class CourseController extends Controller
         return view('course-read')->with(['toRead' => $collectionToRead]);
     }
 
+    public function destroy(Request $request)
+    {
+        $courseId = $request->get('courseId');
+        $courseBeDeleted = Materi::query()->where('id', $courseId)->firstOrFail();
+
+        // delete course
+        $courseBeDeleted->delete();
+        return redirect()->route("guru.course")->with(['msg' => "Materi berhasil dihapus!"]);
+    }
+
+
     public function create(CourseRequest $request)
     {
         $course = $request->validated();
@@ -229,5 +240,7 @@ class CourseController extends Controller
         $materiCoverGambar['materi_id'] = $courseModel->id;
         $materiCoverGambar->cover = $this->locationImage  . "/" . $request->image;
         $materiCoverGambar->save();
+
+        return redirect()->route("guru.course")->with(['msg' => "Materi berhasil dibuat!"]);
     }
 }

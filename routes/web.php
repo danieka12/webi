@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -101,10 +102,6 @@ Route::prefix("guru")->name('guru.')->group(function () {
             return view("admin.confirm-student");
         })->name("confirmStudent");
 
-        Route::get("/materi", function () {
-            return view('admin.course');
-        })->name("course");
-
         Route::get("/materi/tambah", function () {
             return view("admin.add-course");
         })->name("addCourse");
@@ -113,8 +110,15 @@ Route::prefix("guru")->name('guru.')->group(function () {
             return view('admin.teacher');
         })->name("teacher");
 
+
+        /**
+         * Materi Route
+         */
+        Route::post('/materi/delete', [CourseController::class, 'destroy'])->name('course.delete');
         Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
-        Route::post("/image-upload", [CourseController::class, 'uploadImage'])->name('course.uploadImage');
+        Route::post("/materi/image/upload", [CourseController::class, 'uploadImage'])->name('course.uploadImage');
+        Route::get("/materi", [GuruController::class, 'listCourse'])->name('course');
+
         Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
 
         /**
