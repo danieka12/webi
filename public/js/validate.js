@@ -42,7 +42,7 @@ jQuery(document).ready(function () {
         $("#message-contact").slideUp(750, function () {
             $("#message-contact").hide();
 
-            $("#submit-contact")
+            $("#submit-course")
                 .after('<i class="icon-spin4 animate-spin loader"></i>')
                 .attr("disabled", "disabled");
 
@@ -59,7 +59,7 @@ jQuery(document).ready(function () {
                     $("#contactform .loader").fadeOut("slow", function () {
                         $(this).remove();
                     });
-                    $("#submit-contact").removeAttr("disabled");
+                    $("#submit-course").removeAttr("disabled");
                     if (data.match("success") != null)
                         $("#contactform").slideUp("slow");
                 }

@@ -1,9 +1,16 @@
+@if ($hasTaken)
+<div class="alert alert-success" role="alert">
+ <span class="text-sm">
+   Anda sudah mengambil materi ini. Silahkan tunggu konfirmasi dari guru pengampu mata pelajaran.
+ </span>
+</div>
+@endif
+
 <div class="box_detail">
     <h4 class="text-center">Gabung Materi</h4>
     <p class="nopadding">Tekan tombol Gabung Sekarang untuk bisa membaca materi secara lengkap.</p>
     <div id="message-contact"></div>
-    <form method="POST" action={{ route('course.join.post') }} id="contactform" autocomplete="off">
-        @csrf
+    <form id="contactform" autocomplete="off">
         <div class="row">
             <input type="hidden" id="slug" name="slug" value={{ $slug }}>
             @if(Auth::guard('siswa')->user())
@@ -15,12 +22,12 @@
             This is a danger alert—check it out!
         </div>
     @endif
-     @if(!Auth::guard('siswa')->check())
-      <button type="submit" disabled  class="btn_1 full-width" id="submit-contact">
+     @if(!Auth::guard('siswa')->check() || $hasTaken)
+      <button type="submit" disabled  class="btn_1 full-width" id="submit-course">
            {{ $titleBtn }}
        </button>  
        @else
-       <button type="submit" class="btn_1 full-width" id="submit-contact">
+       <button type="submit" class="btn_1 full-width" id="submit-course">
         {{ $titleBtn }}
        </button>
      @endif

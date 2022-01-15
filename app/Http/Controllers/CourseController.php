@@ -10,6 +10,7 @@ use App\Models\Penulis;
 use App\Models\TujuanPembelajaran;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class CourseController extends Controller
@@ -45,6 +46,7 @@ class CourseController extends Controller
 
     public function detail($slug)
     {
+        $user = Auth::guard("siswa")->check() ? Auth::guard("siswa")->user()->id : false;
         $courseId = $this->getId($slug);
         $course = Materi::with(["penulis.guru.mengajar.materi", "opsiMateri", 'tujuanPembelajaran'])->withCount(['gabungMateri as gabung_materi_count' => function ($query) {
             $query->where('konfirmasi_gabung', '=', true);
@@ -66,6 +68,7 @@ class CourseController extends Controller
                     return $field['materi']['judul'];
                 })
             ],
+            'hasTaken' => $user ? GabungMateri::query()->where("siswaId", $user) : $user,
             'slug' => $slug,
         ];
 
@@ -87,7 +90,7 @@ class CourseController extends Controller
 
         // check if this user has been joined before
         if (!empty(GabungMateri::where('materi_id',  $courseId)->where("siswa_id", $validated['user_id'])->first())) {
-            return response()->json(["success" => false, "msg" => "Anda sudah mengambil materi ini"], 400);
+            return response()->json(["success" => false, "msg" => "Anda sudah mengambil materi ini", "hasTaked" => true], 400);
         }
 
         $joinCourse['guru_id'] = $guruId;
@@ -140,7 +143,7 @@ class CourseController extends Controller
             });
         }
 
-        return view('course')->with(['labelTitle' => is_object($opsiMateri) ? "Semua" : $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
+        return view('course')->with(['labelTitle' => !isset($opsiMateri['judul']) ? "Semua" : $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
 
     public function readCourse(string $slug)
