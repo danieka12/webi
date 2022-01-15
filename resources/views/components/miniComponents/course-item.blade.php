@@ -7,10 +7,12 @@
     {{-- <div class="price">$39</div> --}}
 
 </figure>
-<div class="wrapper">
+<div class="wrapper-popular wrapper">
     <small>{{ $courseLabel }}</small>
     <h3>{{ $title }}</h3>
-    <p>{{ $desc }}.</p>
+   <div class="wrapper-body">
+    {!! $desc !!}   
+   </div>
 
 </div>
 <ul>

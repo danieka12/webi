@@ -5,10 +5,10 @@
         <img src={{ $previewImage }} class="image-fluid" alt="" />
     </a>
 </figure>
-<div class="wrapper">
+<div class="wrapper wrapper-popular">
     <small>{{ $courseLabel }}</small>
     <h3>{{ $title }}</h3>
-    <p>{{ $desc }}.</p>
+    <div class="wrapper-body">{!! $desc !!}</div>
 
 </div>
 <ul>

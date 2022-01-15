@@ -117,7 +117,21 @@ class CourseController extends Controller
                 return  [
                     'courseLabel' => $opsiMateri['judul'],
                     'title' => $courseList['judul'],
-                    'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.',
+                    'desc' => $courseList['konten'],
+                    'timeToComplete' => $courseList['durasi'],
+                    'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
+                    'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
+                    'hasEnroll' => false
+                ];
+            });
+        } else {
+            $opsiMateri = OpsiMateri::with("materi.materiCoverGambar")->get();
+            $courseListDB = Materi::with(["materiCoverGambar", "opsiMateri"])->limit(9)->get();
+            $courseList = collect($courseListDB)->map(function ($courseList) {
+                return  [
+                    'courseLabel' => $courseList['opsiMateri']['judul'],
+                    'title' => $courseList['judul'],
+                    'desc' => $courseList['konten'],
                     'timeToComplete' => $courseList['durasi'],
                     'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
@@ -126,7 +140,7 @@ class CourseController extends Controller
             });
         }
 
-        return view('course')->with(['labelTitle' => $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
+        return view('course')->with(['labelTitle' => is_object($opsiMateri) ? "Semua" : $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
 
     public function readCourse(string $slug)

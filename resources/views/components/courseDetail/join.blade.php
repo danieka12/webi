@@ -6,7 +6,9 @@
         @csrf
         <div class="row">
             <input type="hidden" id="slug" name="slug" value={{ $slug }}>
+            @if(Auth::guard('siswa')->user())
             <input type="hidden" id="user_id" name="user_id" value={{ Auth::guard('siswa')->user()->id }}>
+            @endif
         <div style="position:relative;" class="mt-4">
     @if($errors->any())
         <div class="alert alert-danger" role="alert">

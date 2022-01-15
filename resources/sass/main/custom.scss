@@ -1,5 +1,13 @@
 body {
-	overflow: {
-		x: hidden
-	}
+    overflow: {
+        x: hidden;
+    }
+}
+
+.wrapper-popular {
+    .wrapper-body {
+        height: 3rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

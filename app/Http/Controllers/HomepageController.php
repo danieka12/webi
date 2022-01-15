@@ -31,7 +31,7 @@ class HomepageController extends Controller
             return  [
                 'courseLabel' => $courseList['opsiMateri']['judul'],
                 'title' => $courseList['judul'],
-                'desc' => 'Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.',
+                'desc' => $courseList['konten'],
                 'timeToComplete' => '1h 30min',
                 'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg',
                 'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
