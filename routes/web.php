@@ -104,9 +104,6 @@ Route::prefix("guru")->name('guru.')->group(function () {
         })->name("addCourse");
         Route::get("/materi/edit/{materiId}", [CourseController::class, "edit"])->name("editCourse");
 
-        Route::get("/profil", function () {
-            return view('admin.teacher');
-        })->name("teacher");
 
 
         /**
@@ -125,6 +122,12 @@ Route::prefix("guru")->name('guru.')->group(function () {
          */
         Route::get("/konfirmasi", [GuruController::class, "confirmStudent"])->name("confirmStudent");
         Route::post("/konfirmasi/siswa", [GuruController::class, "confirmation"])->name('confirmationStudent');
+
+        /**
+         * Guru Route
+         */
+        Route::get("/profil", [GuruController::class, 'show'])->name("teacher");
+        Route::post("/profil", [GuruController::class, 'update'])->name('teacher.update');
 
         /**
          * Logout Routes

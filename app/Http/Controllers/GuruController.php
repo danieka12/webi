@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ConfirmationStudent;
+use App\Http\Requests\TeacherProfileUpdate;
 use App\Models\GabungMateri;
 use App\Models\Guru as ModelsGuru;
 use App\Models\Materi;
 use App\Models\Penulis;
 use App\Models\Siswa;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+
 
 class GuruController extends Controller
 {
+    private $locationImage = "images/upload";
+
+
     public function index()
     {
         return view('home.index');
@@ -22,6 +27,18 @@ class GuruController extends Controller
     public function detailTeacher(string $id)
     {
         $teacher = ModelsGuru::with(['penulis.materi.gabungMateri', 'mengajar'])->where('id', $id)->get();
+    }
+
+    private function imageHandler(?string $path)
+    {
+        if (isset($path)) {
+            $img = Image::make(public_path() . "/" . $path);
+            return [
+                'name' => explode("/", $path)[2],
+                'size' => $img->filesize(),
+                'type' => $img->mime,
+            ];
+        }
     }
 
     private function transformDate($date)
@@ -81,5 +98,46 @@ class GuruController extends Controller
                 'duration' => $course->durasi
             ];
         })]);
+    }
+
+    public function show()
+    {
+        $teacherId = Auth::guard('guru')->user()->id;
+        $teacherModel = ModelsGuru::query()->with('penulis')->where('id', $teacherId)->firstOrFail();
+        $image = $this->imageHandler($teacherModel->penulis['foto_profile']);
+        $dataTransform = [
+            'id' =>  $teacherId,
+            'name' => $teacherModel->name,
+            'email' => $teacherModel->email,
+            'description' => $teacherModel->penulis->description,
+            'image' => [
+                'name' => $image['name'] ?? "",
+                'size' => $image['size'] ?? "",
+                'type' => $image['type'] ?? "",
+                'coverUrl' => $teacherModel->penulis['foto_profile'] ?? ""
+            ],
+        ];
+        return view('admin.teacher')->with(['data' => $dataTransform]);
+    }
+
+    public function update(TeacherProfileUpdate $request)
+    {
+        $teacher = $request->validated();
+        $teacherId = Auth::guard('guru')->user()->id;
+        $teacherModel = ModelsGuru::query()->where('id', $teacherId)->firstOrFail();
+        $writer = Penulis::query()->where('guru_id', $teacherId)->firstOrFail();
+
+        // TODO:: Update teacher model
+        $teacherModel->name = $teacher['name'];
+        $teacherModel->email = $teacher['email'];
+        if (!empty($teacher['password']))  $teacherModel->password = $teacher['password'];
+        $teacherModel->save();
+
+        // TODO:: Update writer
+        $writer['foto_profile'] = $this->locationImage  . "/" . $teacher['image'];
+        $writer['description'] = $teacher['description'];
+        $writer->save();
+
+        return redirect()->action([GuruController::class, 'show']);
     }
 }

@@ -26,7 +26,7 @@ class CourseController extends Controller
     }
 
 
-    private function imageHandler(string $path)
+    private function imageHandler(?string $path)
     {
         if (isset($path)) {
             $img = Image::make(public_path() . "/" . $path);
