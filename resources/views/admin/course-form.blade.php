@@ -12,7 +12,7 @@
                     <h2><i class="fa fa-file"></i>Upload Cover Gambar Materi</h2>
                 </div>
                 <div class="form-group">
-                    <label>Your photo</label>
+                    <label>Foto Materi (Cover)</label>
                     @if (isset($data))
                         <form action={{ route('guru.course.uploadImage') }} class="dropzone">
                         @else

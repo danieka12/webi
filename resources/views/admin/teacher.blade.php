@@ -10,31 +10,26 @@
                     <h2><i class="fa fa-file"></i>Edit Profil Guru</h2>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" placeholder="Your name">
+                            <label>Nama Lengkap</label>
+                            <input type="text" class="form-control" placeholder="Masukkan nama lengkap anda">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Last name</label>
-                            <input type="text" class="form-control" placeholder="Your last name">
-                        </div>
-                    </div>
+
                 </div>
                 <!-- /row-->
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Telephone</label>
+                            <label>Telepon</label>
                             <input type="text" class="form-control" placeholder="Your telephone number">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" placeholder="Your email">
+                            <input type="email" class="form-control" placeholder="Masukkan Email Anda">
                         </div>
                     </div>
                 </div>
@@ -53,34 +48,19 @@
 
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
-                    <h2><i class="fa fa-share-alt"></i>Social profiles</h2>
+                    <h2><i class="fa fa-lock"></i>Keamanan</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Facebook</label>
-                            <input type="text" class="form-control" placeholder="Link">
+                            <label>Password</label>
+                            <input type="text" class="form-control" placeholder="*****">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Linkdin</label>
-                            <input type="text" class="form-control" placeholder="Link">
-                        </div>
-                    </div>
-                </div>
-                <!-- /row-->
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Google Plus</label>
-                            <input type="text" class="form-control" placeholder="Link">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Twitter</label>
-                            <input type="text" class="form-control" placeholder="Link">
+                            <label>Konfirmasi Password</label>
+                            <input type="text" class="form-control" placeholder="*****">
                         </div>
                     </div>
                 </div>
@@ -90,7 +70,7 @@
 
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
-                    <h2><i class="fa fa-file-text"></i>Curriculum</h2>
+                    <h2><i class="fa fa-file-text"></i>Detail Informasi</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
@@ -115,49 +95,8 @@
             </div>
             <!-- /box_general-->
 
-            <div class="box_general padding_bottom">
-                <div class="header_box version_2">
-                    <h2><i class="fa fa-folder"></i>Courses</h2>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <h6>Course item</h6>
-                        <table id="pricing-list-container" style="width:100%;">
-                            <tr class="pricing-list-item">
-                                <td>
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Title">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Category">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" placeholder="Price">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                        <a href="#0" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i>Add
-                            Item</a>
-                    </div>
-                </div>
-                <!-- /row-->
-            </div>
             <!-- /box_general-->
-            <p><a href="#0" class="btn_1 medium">Save</a></p>
+            <p><a href="#0" class="btn_1 medium">Simpan Data</a></p>
         </div>
         <!-- /.container-fluid-->
     </div>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-default fixed-top" id="mainNav">
     <a class="navbar-brand" href="{{ route('guru.dashboard') }}"><img src={{ asset('images/admin/logo.png') }}
-            data-retina="true" alt="" width="163" height="36"></a>
+            data-retina="true" alt="" width="130" height="36"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
         data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
         aria-label="Toggle navigation">
