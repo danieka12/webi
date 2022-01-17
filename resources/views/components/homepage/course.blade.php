@@ -5,9 +5,10 @@
         <p>{{ $desc }}</p>
     </div>
     <div class="row">
-     @foreach ($categories as $category)
-         @include('components.miniComponents.category-course-card', ['title' => $category['title'], 'metaTitle' => $category['metaTitle'], 'previewImage' => $category['previewImage'], 'href' => $category['href']])
-     @endforeach
+        @foreach ($categories as $category)
+            @include('components.miniComponents.category-course-card', ['title' => $category['title'], 'metaTitle' =>
+            $category['metaTitle'], 'previewImage' => $category['previewImage'], 'href' => $category['href']])
+        @endforeach
         <!-- /grid_item -->
     </div>
     <!-- /row -->

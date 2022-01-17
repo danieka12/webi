@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label>{{ $description }}</label>
-               @include('admin.components.miniComponents.ckeditor')
+                @include('admin.components.miniComponents.ckeditor')
             </div>
         </div>
     </div>

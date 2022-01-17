@@ -3,10 +3,10 @@
         <figure class="block-reveal">
             <div class="block-horizzontal"></div>
             <img src={{ $previewImage }} class="image-fluid" alt="" />
-                <div class="info">
-                    <small><i class="ti-layers"></i>{{ $metaTitle }}</small>
-                    <h3>{{ $title }}</h3>
-                </div>
+            <div class="info">
+                <small><i class="ti-layers"></i>{{ $metaTitle }}</small>
+                <h3>{{ $title }}</h3>
+            </div>
         </figure>
     </a>
 </div>

@@ -10,9 +10,9 @@
 <div class="wrapper-popular wrapper">
     <small>{{ $courseLabel }}</small>
     <h3>{{ $title }}</h3>
-   <div class="wrapper-body">
-    {!! $desc !!}   
-   </div>
+    <div class="wrapper-body">
+        {!! $desc !!}
+    </div>
 
 </div>
 <ul>
@@ -20,5 +20,5 @@
     @if ($hasEnroll)
         <li class="text-success"><i class="icon_check"></i> Telah Diambil</li>
     @endif
-    <li><a href={{ $href }}>{{ $hasEnroll ? "Buka" : "Ambil" }} Materi</a></li>
+    <li><a href={{ $href }}>{{ $hasEnroll ? 'Buka' : 'Ambil' }} Materi</a></li>
 </ul>

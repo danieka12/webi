@@ -2,7 +2,7 @@
     <a class="box_news" href={{ $href }}>
         <figure>
             <img src={{ $meta['imagePreview'] }} alt="" />
-                <figcaption><strong>{{ $meta['date'] }}</strong>{{ $meta['month'] }}</figcaption>
+            <figcaption><strong>{{ $meta['date'] }}</strong>{{ $meta['month'] }}</figcaption>
         </figure>
         <ul>
             <li>{{ $author }}</li>

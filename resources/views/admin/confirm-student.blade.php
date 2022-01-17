@@ -1,23 +1,23 @@
 @extends('admin.components.app')
 
 @section('body')
-<div class="content-wrapper">
-    <div class="container-fluid">
-      <!-- Breadcrumbs-->
-     @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Konfirmasi Siswa'])
-		<div class="box_general">
-			<div class="header_box">
-				<h2 class="d-inline-block">Konfirmasi Siswa Untuk Bergabung Kedalam Materi</h2>
-			</div>
-			<div class="list_general">
-				<ul>
-				@foreach ($confirmStudents as $confirmStudent)
-					@include('admin.components.miniComponents.card-confirm', $confirmStudent)
-				@endforeach
-				</ul>
-			</div>
-		</div>
-		{{-- <!-- /box_general-->
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Konfirmasi Siswa'])
+            <div class="box_general">
+                <div class="header_box">
+                    <h2 class="d-inline-block">Konfirmasi Siswa Untuk Bergabung Kedalam Materi</h2>
+                </div>
+                <div class="list_general">
+                    <ul>
+                        @foreach ($confirmStudents as $confirmStudent)
+                            @include('admin.components.miniComponents.card-confirm', $confirmStudent)
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            {{-- <!-- /box_general-->
 		<nav aria-label="...">
 			<ul class="pagination pagination-sm add_bottom_30">
 				<li class="page-item disabled">
@@ -31,8 +31,8 @@
 				</li>
 			</ul>
 		</nav> --}}
-		<!-- /pagination-->
-	  </div>
-	  <!-- /container-fluid-->
-   	</div>
+            <!-- /pagination-->
+        </div>
+        <!-- /container-fluid-->
+    </div>
 @endsection
