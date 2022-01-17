@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConfirmationStudent;
 use App\Models\GabungMateri;
 use App\Models\Guru as ModelsGuru;
 use App\Models\Materi;
 use App\Models\Penulis;
+use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +37,6 @@ class GuruController extends Controller
             "materi.materiCoverGambar",
             "siswa"
         ])->where("guru_id", $teacherId)->orderBy("konfirmasi_gabung", "asc")->get();
-        // return response()->json($confirmStudents);
         return view("admin.confirm-student")->with(['confirmStudents' => collect($confirmStudents)->map(function ($confirmStudent) {
             return [
                 'id' => $confirmStudent->id,
@@ -47,9 +48,22 @@ class GuruController extends Controller
                 'course' => [
                     'title' => $confirmStudent->materi->judul,
                     'description' => $confirmStudent->materi->konten
-                ]
+                ],
+                'hasConfirm' =>  $confirmStudent['konfirmasi_gabung']
             ];
         })]);
+    }
+
+    public function confirmation(ConfirmationStudent $request)
+    {
+        $confirmation = $request->validated();
+        $student = Siswa::query()->where('nis', $confirmation['studentId'])->firstOrFail();
+        $confirmationStudent = GabungMateri::query()->where('id', $confirmation['courseId'])->where('siswa_id', $student->id)->firstOrFail();
+
+        // TODO:: update confirmationStudent
+        $confirmationStudent['konfirmasi_gabung'] = true;
+        $confirmationStudent->save();
+        return redirect()->route("guru.confirmStudent")->with(['msg' => "Siswa berhasil disetujui"]);
     }
 
     public function listCourse()

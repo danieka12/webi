@@ -1,4 +1,4 @@
-@if ($hasTaken)
+@if ($hasTaken && !$hasConfirm)
     <div class="alert alert-success" role="alert">
         <span class="text-sm">
             Anda sudah mengambil materi ini. Silahkan tunggu konfirmasi dari guru pengampu mata pelajaran.
@@ -7,8 +7,14 @@
 @endif
 
 <div class="box_detail">
-    <h4 class="text-center">Gabung Materi</h4>
-    <p class="nopadding">Tekan tombol Gabung Sekarang untuk bisa membaca materi secara lengkap.</p>
+    <h4 class="text-center">{{ $titleBtn }}</h4>
+    @if (!$hasTaken || !$hasConfirm)
+        <p class="nopadding">Tekan tombol Gabung Sekarang untuk bisa membaca materi secara lengkap.</p>
+    @else
+        <p class="nopadding">Silahkan membaca materi secara lengkap. Dengan menekan tombol
+            <b>{{ $titleBtn }}</b></p>
+
+    @endif
     <div id="message-contact"></div>
     <form id="contactform" method="POST" action={{ route('course.join.post') }} autocomplete="off">
         <div class="row">

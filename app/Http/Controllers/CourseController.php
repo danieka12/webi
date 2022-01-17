@@ -100,6 +100,9 @@ class CourseController extends Controller
             'hasTaken' => $user ? !is_null(GabungMateri::query()
                 ->where("siswa_id", $user)
                 ->where("materi_id", $course->id)->first()) : $user,
+            'hasConfirm' => $user ? GabungMateri::query()
+                ->where("siswa_id", $user)
+                ->where("materi_id", $course->id)->first()['konfirmasi_gabung'] : $user,
             'slug' => $slug,
         ];
 

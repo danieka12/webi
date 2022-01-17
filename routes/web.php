@@ -27,9 +27,6 @@ Route::name("course.")->group(function () {
 
     Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('search');
     Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail');
-    Route::get("/materi/gabung/{slug}", function () {
-        return view('take-course');
-    })->name('join');
 
     // authenticated route
     Route::middleware(['auth:siswa'])->group(function () {
@@ -100,7 +97,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
             return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm)]);
         })->name("dashboard");
 
-        Route::get("/konfirmasi", [GuruController::class, "confirmStudent"])->name("confirmStudent");
+
 
         Route::get("/materi/tambah", function () {
             return view("admin.course-form")->with(['title' => 'Tambah Materi']);
@@ -122,6 +119,12 @@ Route::prefix("guru")->name('guru.')->group(function () {
         Route::get("/materi", [GuruController::class, 'listCourse'])->name('course');
 
         Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');
+
+        /**
+         * Siswa Route
+         */
+        Route::get("/konfirmasi", [GuruController::class, "confirmStudent"])->name("confirmStudent");
+        Route::post("/konfirmasi/siswa", [GuruController::class, "confirmation"])->name('confirmationStudent');
 
         /**
          * Logout Routes

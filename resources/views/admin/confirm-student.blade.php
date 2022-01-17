@@ -5,6 +5,7 @@
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => 'Konfirmasi Siswa'])
+            @include('admin.error-form')
             <div class="box_general">
                 <div class="header_box">
                     <h2 class="d-inline-block">Konfirmasi Siswa Untuk Bergabung Kedalam Materi</h2>
