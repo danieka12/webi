@@ -36,9 +36,7 @@ Route::name("course.")->group(function () {
 });
 
 Route::name("teacher.")->group(function () {
-    Route::get("/guru/detail/{id}", function () {
-        return view('teacher-detail');
-    })->name('profile');
+    Route::get("/guru/detail/{id}", [GuruController::class, 'detail'])->name('profile');
 });
 
 Route::name('auth.')->group(function () {

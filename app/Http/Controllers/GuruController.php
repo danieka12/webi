@@ -12,7 +12,7 @@ use App\Models\Siswa;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-
+use Illuminate\Support\Str;
 
 class GuruController extends Controller
 {
@@ -27,6 +27,15 @@ class GuruController extends Controller
     public function detailTeacher(string $id)
     {
         $teacher = ModelsGuru::with(['penulis.materi.gabungMateri', 'mengajar'])->where('id', $id)->get();
+    }
+
+    private function href(string $prefix, string $slug, bool $withId = false, string $id = null)
+    {
+        if ($withId) {
+            return $prefix . Str::slug($slug) . "." . $id;
+        }
+
+        return $prefix . Str::slug($slug);
     }
 
     private function imageHandler(?string $path)
@@ -139,5 +148,32 @@ class GuruController extends Controller
         $writer->save();
 
         return redirect()->action([GuruController::class, 'show']);
+    }
+
+    public function detail(string $id)
+    {
+        $teacher = ModelsGuru::findOrFail($id);
+        $writer = Penulis::query()->where('guru_id', $teacher->id)->firstOrFail();
+        $teacherJoined = GabungMateri::query()->where('guru_id', $teacher->id)->where('konfirmasi_gabung', true)->get();
+        $course = Materi::query()->with('opsiMateri')->where('penulis_id', $writer->id)->get();
+        return view('teacher-detail')->with([
+            'profil' => [
+                'teacherName' => $teacher->name,
+                'siswaJoin' => count($teacherJoined),
+                'courses' => count($course),
+                'teacherProfile' => $writer['foto_profile'],
+            ],
+            'meta' => [
+                'description' => $writer['description'],
+                'listCourses' => collect($course)->map(function ($c) {
+                    return [
+                        'id' => $c->id,
+                        'category' => $c['opsiMateri']['judul'],
+                        'title' => $c->judul,
+                        'href' => $this->href('materi/detail/', $c['judul'], true, $c['id'])
+                    ];
+                })
+            ]
+        ]);
     }
 }
