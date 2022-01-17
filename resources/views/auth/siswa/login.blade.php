@@ -4,6 +4,7 @@
         {{-- include guru component --}}
         @include('auth.guru.logo')
         <form method="POST" action={{ route('auth.login.post') }}>
+            @include('admin.error-form')
             @csrf
             @include('components.miniComponents.message')
             <div class="form-group">

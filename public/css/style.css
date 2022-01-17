@@ -700,7 +700,7 @@ ul#top_menu li a.btn_1:hover {
   border-bottom: 5px solid #FFC107;
 }
 #hero_in.general:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_general.jpg) center center no-repeat;
+  background: url(https://images.unsplash.com/photo-1530099486328-e021101a494a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=947&q=80) center center no-repeat;
   background-size: cover;
 }
 #hero_in.general .wrapper {
@@ -1178,7 +1178,7 @@ video {
   }
 }
 .hero_single:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/home_section_2.jpg) center center no-repeat fixed;
+  background: url(https://images.unsplash.com/photo-1585637071663-799845ad5212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80) center center no-repeat fixed;
   background-size: cover;
 }
 .hero_single .wrapper {
@@ -1253,7 +1253,7 @@ video {
   }
 }
 .hero_single.version_2:before {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/home_section_1.jpg) center center no-repeat fixed;
+  background: url(https://images.unsplash.com/photo-1585637071663-799845ad5212?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80) center center no-repeat fixed;
   background-size: cover;
 }
 .hero_single.version_2 .wrapper {
@@ -3303,14 +3303,14 @@ section#reviews {
 #login_bg,
 #register_bg,
 #admission_bg {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_login.jpg) center center no-repeat fixed;
+  background: url(https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=932&q=80) center center no-repeat fixed;
   background-size: cover;
   min-height: 100vh;
   width: 100%;
 }
 
 #register_bg {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_register.jpg) center center no-repeat fixed;
+  background: url(https://images.unsplash.com/photo-1494949649109-ecfc3b8c35df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80) center center no-repeat fixed;
   background-size: cover;
 }
 
@@ -4605,7 +4605,7 @@ ul.list_3 li:before {
 }
 
 .call_section {
-  background: url(http://via.placeholder.com/1600x1067/ccc/fff/bg_call_section.jpg) center center no-repeat fixed;
+  background: url(https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80) center center no-repeat fixed;
   background-size: cover;
   min-height: 400px;
   padding: 10% 0;
