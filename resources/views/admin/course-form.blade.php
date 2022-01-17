@@ -32,14 +32,14 @@
         @endif
         @csrf
         <div class="container-fluid">
-            <input name="image" type="hidden" value={{ isset($data) ? $data['image']['coverUrl'] : '' }}
+            <input name="image" type="hidden" value="{{ isset($data) ? $data['image']['name'] : '' }}"
                 class="image-upload-value">
-            <input type="hidden" name="guruId" value={{ Auth::guard('guru')->user()->id }} />
+            <input type="hidden" name="guruId" value="{{ Auth::guard('guru')->user()->id }}" />
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
                     @if (isset($data))
                         <h2><i class="fa fa-file"></i>Ubah Materi Yang Akan Diajarkan</h2>
-                        <input type="text" value={{ $data['id'] }} hidden name="materiId">
+                        <input type="text" value="{{ $data['id'] }}" hidden name="materiId">
                     @else
                         <h2><i class="fa fa-file"></i>Tambah Materi Yang Akan Diajarkan</h2>
                     @endif
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label>Judul Materi</label>
                             <input type="text" name="title" class="form-control" placeholder="Judul Materi"
-                                value={{ isset($data) ? $data['title'] : '' }}>
+                                value="{{ isset($data) ? $data['title'] : '' }}">
                         </div>
                     </div>
                     <div class="col-md-6">

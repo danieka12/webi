@@ -28,12 +28,14 @@ class CourseController extends Controller
 
     private function imageHandler(string $path)
     {
-        $img = Image::make(public_path() . "/" . $path);
-        return [
-            'name' => explode("/", $path)[2],
-            'size' => $img->filesize(),
-            'type' => $img->mime,
-        ];
+        if (isset($path)) {
+            $img = Image::make(public_path() . "/" . $path);
+            return [
+                'name' => explode("/", $path)[2],
+                'size' => $img->filesize(),
+                'type' => $img->mime,
+            ];
+        }
     }
 
     private function strLimit(string $str, $limit = 15)
@@ -243,15 +245,32 @@ class CourseController extends Controller
     public function update(CourseRequest $request)
     {
         $course = $request->validated();
-        $courseModel = Materi::find($request->materiId);
+        $courseModel = Materi::findOrFail($request->materiId);
         $courseMeta = TujuanPembelajaran::query()->where('materi_id', $request->materiId)->firstOrFail();
-        $courseMateriCoverGambar = MateriCoverGambar::query()->where('materi_id', $request->materiId);
+        $courseMateriCoverGambar = MateriCoverGambar::query()->where('materi_id', $request->materiId)->firstOrFail();
 
-        dd([
-            'courseMeta' => $courseMeta,
-            'courseModel' => $courseModel,
-            'courseMateriCoverGambar' => $courseMateriCoverGambar,
-        ]);
+        // TODO: Update the course
+        $courseModel['opsi_materi_id'] = $request->categoryId;
+        $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
+        $courseModel->durasi = $course['durationHour']  . " Jam " . $course['durationMinute'] . " Menit";
+        $courseModel->judul = $course['title'];
+        $courseModel->konten = $course['content'];
+        $courseModel->save();
+
+
+        // TODO: Update the courseMeta
+        $courseMeta['materi_id'] = $courseModel->id;
+        $courseMeta['guru_id'] = $request->guruId;
+        $courseMeta->description = $course['description'];
+        $courseMeta->save();
+
+
+        // TODO: Update the materiCoverGambar
+        $courseMateriCoverGambar['materi_id'] = $courseModel->id;
+        $courseMateriCoverGambar->cover = $this->locationImage  . "/" . $request->image;
+        $courseMateriCoverGambar->save();
+
+        return redirect()->route("guru.course")->with(['msg' => "Materi berhasil diubah!"]);
     }
 
 
@@ -298,10 +317,10 @@ class CourseController extends Controller
                 'value' => $course->opsiMateri->judul
             ],
             'image' => [
-                'name' => $image['name'],
-                'size' => $image['size'],
-                'type' => $image['type'],
-                'coverUrl' => $course['materiCoverGambar']->cover
+                'name' => $image['name'] ?? "",
+                'size' => $image['size'] ?? "",
+                'type' => $image['type'] ?? "",
+                'coverUrl' => $course['materiCoverGambar']->cover ?? ""
             ],
             'content' => $course->konten
         ];
