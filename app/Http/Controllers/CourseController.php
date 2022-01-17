@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 
 class CourseController extends Controller
 {
@@ -22,6 +23,17 @@ class CourseController extends Controller
     private function getId(string $params)
     {
         return explode(".", $params)[1];
+    }
+
+
+    private function imageHandler(string $path)
+    {
+        $img = Image::make(public_path() . "/" . $path);
+        return [
+            'name' => explode("/", $path)[2],
+            'size' => $img->filesize(),
+            'type' => $img->mime,
+        ];
     }
 
     private function strLimit(string $str, $limit = 15)
@@ -228,6 +240,20 @@ class CourseController extends Controller
         return redirect()->route("guru.course")->with(['msg' => "Materi berhasil dihapus!"]);
     }
 
+    public function update(CourseRequest $request)
+    {
+        $course = $request->validated();
+        $courseModel = Materi::find($request->materiId);
+        $courseMeta = TujuanPembelajaran::query()->where('materi_id', $request->materiId)->firstOrFail();
+        $courseMateriCoverGambar = MateriCoverGambar::query()->where('materi_id', $request->materiId);
+
+        dd([
+            'courseMeta' => $courseMeta,
+            'courseModel' => $courseModel,
+            'courseMateriCoverGambar' => $courseMateriCoverGambar,
+        ]);
+    }
+
 
     public function create(CourseRequest $request)
     {
@@ -256,9 +282,11 @@ class CourseController extends Controller
         return redirect()->route("guru.course")->with(['msg' => "Materi berhasil dibuat!"]);
     }
 
+
     public function edit(Request $request, string $materiId)
     {
         $course = Materi::with(["materiCoverGambar", 'tujuanPembelajaran', 'opsiMateri'])->where('id', $materiId)->firstOrFail();
+        $image = $this->imageHandler($course['materiCoverGambar']->cover);
         $transformCourse = [
             'id' => $course->id,
             'title' => $course->judul,
@@ -268,6 +296,12 @@ class CourseController extends Controller
             'category' => [
                 'id' => $course->opsiMateri->id,
                 'value' => $course->opsiMateri->judul
+            ],
+            'image' => [
+                'name' => $image['name'],
+                'size' => $image['size'],
+                'type' => $image['type'],
+                'coverUrl' => $course['materiCoverGambar']->cover
             ],
             'content' => $course->konten
         ];

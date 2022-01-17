@@ -5,7 +5,7 @@
     <div class="content-wrapper">
         <!-- Breadcrumbs-->
         @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => $title])
-
+        @include('admin.error-form')
         <div class="col-md-12">
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
@@ -32,7 +32,8 @@
         @endif
         @csrf
         <div class="container-fluid">
-            <input name="image" type="hidden" value="" class="image-upload-value">
+            <input name="image" type="hidden" value={{ isset($data) ? $data['image']['coverUrl'] : '' }}
+                class="image-upload-value">
             <input type="hidden" name="guruId" value={{ Auth::guard('guru')->user()->id }} />
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
@@ -57,14 +58,14 @@
                                 <div class="form-group">
                                     <label>Durasi Materi (Jam)</label>
                                     <input type="text" name="durationHour" class="form-control"
-                                        value={{ isset($data) ? $data['durationHour'] : '' }} placeholder="1 Jam">
+                                        value="{{ isset($data) ? $data['durationHour'] : '' }}" placeholder="1 Jam">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Durasi Materi (Menit)</label>
                                     <input type="text" name="durationMinute" class="form-control"
-                                        value={{ isset($data) ? $data['durationMinute'] : '' }} placeholder="30 Menit">
+                                        value="{{ isset($data) ? $data['durationMinute'] : '' }}" placeholder="30 Menit">
                                 </div>
                             </div>
                         </div>
@@ -95,7 +96,7 @@
                             {{-- <label>Category <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label> --}}
                             <label>Kategori Materi</label>
                             @include('admin.components.miniComponents.select2', ['name' => 'categoryId', 'placeholder' =>
-                            'Pilih Kategori Materi', 'defaultValue' => isset($data) ? $data['category'] : "",
+                            'Pilih Kategori Materi', 'defaultValue' => isset($data) ? $data['category'] : null,
                             'route' => route('guru.categories')])
                         </div>
                     </div>
@@ -127,6 +128,27 @@
         var myDropzone = new Dropzone(".dropzone", {
             maxFilesize: 2, // 2 mb
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
+            init: function() {
+                if ("{{ isset($data) }}") {
+                    var thisDropzone = this;
+                    var mockFile = {
+                        name: "{{ isset($data) ? $data['image']['name'] : '' }}",
+                        size: "{{ isset($data) ? $data['image']['size'] : '' }}",
+                        type: "{{ isset($data) ? $data['image']['type'] : '' }}"
+                    };
+                    thisDropzone.emit("addedfile", mockFile);
+                    thisDropzone.emit("success", mockFile);
+                    thisDropzone.emit("thumbnail", mockFile,
+                        "{{ isset($data) ? asset($data['image']['coverUrl']) : '' }}")
+
+                    this.on("maxfilesexceeded", function(file) {
+                        this.removeFile(file);
+                        alert("No more files please!");
+                    });
+                }
+
+
+            },
         });
         myDropzone.on("success", function(file, response) {
             if (response.success) { // Result
