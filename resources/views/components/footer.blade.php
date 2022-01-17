@@ -30,7 +30,7 @@
                 <h5>Contact with Us</h5>
                 <ul class="contacts">
                     <li><a href="tel://61280932400"><i class="ti-mobile"></i> + 62 878 21476890</a></li>
-                    <li><a href="mailto:info@udema.com"><i class="ti-email"></i> info@udema.com</a></li>
+                    <li><a href="mailto:info@webi.com"><i class="ti-email"></i> info@webi.com</a></li>
                 </ul>
             </div>
         </div>

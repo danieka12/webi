@@ -27,6 +27,6 @@
             <div class="text-center add_top_30">Daftar Sebagai Siswa? <strong><a href={{ route('auth.register') }}>Klik
                         disini</a></strong></div>
         </form>
-        <div class="copy">© 2021 Udema</div>
+        <div class="copy">© 2022 Webi</div>
     </aside>
 @endsection

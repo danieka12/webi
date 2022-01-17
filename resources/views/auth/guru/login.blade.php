@@ -23,6 +23,6 @@
             <button type="submit" class="btn_1 rounded full-width add_top_30">Masuk ke WEBI (Guru</button>
             @include('components.miniComponents.sign-up-by-teacher')
         </form>
-        <div class="copy">© 2021 Udema</div>
+        <div class="copy">© 2022 Webi</div>
     </aside>
 @endsection
