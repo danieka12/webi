@@ -55,7 +55,7 @@ Route::name('auth.')->group(function () {
 
 Route::get("/tentang-peneliti", function () {
     return view('about-author');
-});
+})->name('aboutAuthor');
 
 
 /*

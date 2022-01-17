@@ -14,7 +14,7 @@
             @endforeach
         </div>
         <!-- /row -->
-        <p class="btn_home_align"><a href="blog.html"
+        <p class="btn_home_align"><a href="/"
                 class="btn_1 rounded">{{ isset($viewMore) ? $viewMore : 'Lihat semua berita' }}</a></p>
     </div>
     <!-- /container -->

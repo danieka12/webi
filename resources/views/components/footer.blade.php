@@ -8,11 +8,9 @@
                     expetendis vis.</p>
                 <div class="follow_us">
                     <ul>
-                        <li>Follow us</li>
+                        <li>Ikuti Kami</li>
                         <li><a href="#0"><i class="ti-facebook"></i></a></li>
                         <li><a href="#0"><i class="ti-twitter-alt"></i></a></li>
-                        <li><a href="#0"><i class="ti-google"></i></a></li>
-                        <li><a href="#0"><i class="ti-pinterest"></i></a></li>
                         <li><a href="#0"><i class="ti-instagram"></i></a></li>
                     </ul>
                 </div>
@@ -20,10 +18,10 @@
             <div class="col-lg-3 col-md-6 ml-lg-auto">
                 <h5>Useful links</h5>
                 <ul class="links">
-                    <li><a href="#0">About</a></li>
-                    <li><a href="#0">Login</a></li>
-                    <li><a href="#0">Register</a></li>
-                    <li><a href="#0">News &amp; Events</a></li>
+                    <li><a href="{{ route('aboutAuthor') }}">Tentang Penulis</a></li>
+                    <li><a href="{{ route('auth.login') }}">Login</a></li>
+                    <li><a href="{{ route('auth.register') }}">Register</a></li>
+                    <li><a href="/">Berita &amp; Acara</a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
