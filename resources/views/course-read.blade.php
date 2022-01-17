@@ -2,7 +2,7 @@
 
 @section('content')
     <main>
-        @include('components.miniComponents.hero')
+        @include('components.miniComponents.hero', ['title' => $toRead['title']])
         <!--/hero_in-->
 
         <div class="container margin_60_35">
@@ -21,7 +21,8 @@
 
 
                     <hr>
-                    @include('components.readCourse.comments', ['comments' => $toRead['comments']])
+                    @include('components.readCourse.comments', ['comments' => $toRead['comments'], 'countComment' =>
+                    count($toRead['comments'])])
                     <h5>Berikan Komentar Terbaikmu</h5>
                     @include('components.readCourse.comment-form')
                 </div>

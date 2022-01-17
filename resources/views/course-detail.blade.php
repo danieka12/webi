@@ -15,7 +15,8 @@
                     <!-- /col -->
 
                     <aside class="col-lg-4" id="sidebar">
-                        @include('components.courseDetail.join', ['titleBtn' => $hasTaken && $hasConfirm ? 'Baca Materi' : 'Gabung Sekarang'])
+                        @include('components.courseDetail.join', ['titleBtn' => $hasTaken && $hasConfirm ? 'Baca Materi' :
+                        'Gabung Sekarang', 'slug' => $href])
                     </aside>
                 </div>
                 <!-- /row -->

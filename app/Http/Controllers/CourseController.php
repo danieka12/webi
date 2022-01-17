@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentsRequest;
 use App\Http\Requests\CourseRequest;
+
 use App\Models\GabungMateri;
 use App\Models\Guru;
+use App\Models\Komentar;
 use App\Models\Materi;
 use App\Models\MateriCoverGambar;
 use App\Models\OpsiMateri;
+use App\Models\Penulis;
 use App\Models\TujuanPembelajaran;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,6 +93,7 @@ class CourseController extends Controller
             'category' => $this->strLimit($course['opsiMateri']['judul'], 10),
             'content' => $course['tujuanPembelajaran']['description'],
             'title' => $course['judul'],
+            'href' =>  $this->href("/materi/baca/", $course['judul'], true, $course['id']),
             'guru' => [
                 'id' => $course['penulis']['guru']['id'],
                 'name' => $course['penulis']['guru']['name'],
@@ -204,8 +210,11 @@ class CourseController extends Controller
 
         $collectionToRead =
             [
+                'id' => $toRead['id'],
+                'teacherId' => $toRead['penulis']['guru']['id'],
                 'title' => $toRead['judul'],
                 'label' => $toRead['opsiMateri']['judul'],
+                'coverImage' => $toRead['materiCoverGambar']['judul'],
                 'createdAt' => $this->transformDate($toRead['comments']),
                 'teacher' => $toRead['penulis']['guru']['name'],
                 'comments' => collect($toRead['komentar'])->map(function ($comment) {
@@ -328,5 +337,27 @@ class CourseController extends Controller
             'content' => $course->konten
         ];
         return view("admin.course-form")->with(['data' => $transformCourse, 'title' => 'Edit Materi']);
+    }
+
+    public function comments(CommentsRequest $request)
+    {
+        $comments = $request->validated();
+        $commentInstance = new Komentar;
+
+        $course = Materi::where('id', $comments['courseId'])->firstOrFail();
+        $writer = "";
+
+        if (isset($comment['teacherId'])) {
+            $writer = Penulis::query()->where('guru_id', $comments['teacherId'])->firstOrFail();
+            $commentInstance['penulis_id'] = $writer->id;
+        } else {
+            $commentInstance['siswa_id'] = $comments['studentId'];
+        }
+
+        $commentInstance['materi_id'] = $comments['courseId'];
+        $commentInstance['konten'] = $comments['comments'];
+        $commentInstance->save();
+
+        return redirect()->action([CourseController::class, 'readCourse'], ["slug" => $this->href("/materi/baca/", $course['judul'], true, $course['id'])]);
     }
 }

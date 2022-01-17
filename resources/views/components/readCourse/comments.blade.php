@@ -1,5 +1,5 @@
 <div id="comments">
-    <h5>Komentar</h5>
+    <h5>{{ $countComment }} Komentar</h5>
     <ul>
         @foreach ($comments as $comment)
             @include('components.miniComponents.comments', [

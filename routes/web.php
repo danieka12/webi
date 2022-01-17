@@ -32,6 +32,7 @@ Route::name("course.")->group(function () {
     Route::middleware(['auth:siswa'])->group(function () {
         Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
         Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
+        Route::post('/komentar', [CourseController::class, 'comments'])->name('comments.create');
     });
 });
 

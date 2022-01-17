@@ -12,7 +12,8 @@
         <p class="nopadding">Tekan tombol Gabung Sekarang untuk bisa membaca materi secara lengkap.</p>
     @else
         <p class="nopadding">Silahkan membaca materi secara lengkap. Dengan menekan tombol
-            <b>{{ $titleBtn }}</b></p>
+            <b>{{ $titleBtn }}</b>
+        </p>
 
     @endif
     <div id="message-contact"></div>
@@ -28,12 +29,18 @@
                         This is a danger alert—check it out!
                     </div>
                 @endif
-                @if (!Auth::guard('siswa')->check() || $hasTaken)
-                    <button type="submit" disabled class="btn_1 full-width" id="submit-course">
+                @if (Auth::guard('siswa')->check() && $hasConfirm)
+                    <a href="{{ $slug }}" class="btn_1 full-width" id="submit-course">
+                        {{ $titleBtn }}
+                    </a>
+                @endif
+                @if (Auth::guard('siswa')->check() && $hasTaken && !$hasConfirm)
+                    <button type="submit" class="btn_1 full-width" id="submit-course">
                         {{ $titleBtn }}
                     </button>
-                @else
-                    <button type="submit" class="btn_1 full-width" id="submit-course">
+                @endif
+                @if (!Auth::guard('siswa')->check() || ($hasTaken && !$hasConfirm))
+                    <button type="submit" disabled class="btn_1 full-width" id="submit-course">
                         {{ $titleBtn }}
                     </button>
                 @endif

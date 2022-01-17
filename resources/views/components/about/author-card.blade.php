@@ -20,8 +20,8 @@
                 <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates neglegentur. Eam
                     id legimus torquatos cotidieque, usu decore <strong>percipitur definitiones</strong> ex, nihil
                     utinam recusabo mel no. Dolores reprehendunt no sit, quo cu viris theophrastus. Sit unum efficiendi
-                    cu.</p>p
-                <p><em>CEO Marc Schumaker</em></p>
+                    cu.</p>
+                <p><em>Peneliti Adjie</em></p>
             </div>
         </div>
         <!--/row-->
