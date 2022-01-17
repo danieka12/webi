@@ -1,4 +1,8 @@
-<select class="livesearch form-control" name={{ $name }}></select>
+<select class="livesearch form-control" name={{ $name }}>
+    @if (isset($defaultValue))
+        <option value={{ $defaultValue['id'] }} selected="selected">{{ $defaultValue['value'] }}</option>  
+    @endif                
+</select>
 
 @push('styles')
 <link href={{ asset("vendor/select2/css/select2.min.css") }} rel="stylesheet" />
@@ -18,7 +22,7 @@
                     results: $.map(data, function (item) {
                         return {
                             text: item.judul,
-                            id: item.id
+                            id: item.id,
                         }
                     })
                 };

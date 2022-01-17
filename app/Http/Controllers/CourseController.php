@@ -34,6 +34,18 @@ class CourseController extends Controller
         return Str::title(str_replace('-', ' ', $slug));
     }
 
+    private function splitDuration(string $duration, bool $withDurationHour = false, bool $withDurationMinute = false)
+    {
+        if ($withDurationHour) {
+            return explode(" ", $duration)[0];
+        }
+        if ($withDurationMinute) {
+            return explode(" ", $duration)[2];
+        }
+
+        return 0;
+    }
+
     private function href(string $prefix, string $slug, bool $withId = false, string $id = null)
     {
         if ($withId) {
@@ -242,5 +254,23 @@ class CourseController extends Controller
         $materiCoverGambar->save();
 
         return redirect()->route("guru.course")->with(['msg' => "Materi berhasil dibuat!"]);
+    }
+
+    public function edit(Request $request, string $materiId)
+    {
+        $course = Materi::with(["materiCoverGambar", 'tujuanPembelajaran', 'opsiMateri'])->where('id', $materiId)->firstOrFail();
+        $transformCourse = [
+            'id' => $course->id,
+            'title' => $course->judul,
+            'durationHour' => $this->splitDuration($course->durasi, true, false),
+            'durationMinute' => $this->splitDuration($course->durasi, false, true),
+            'description' => $course->tujuanPembelajaran->description,
+            'category' => [
+                'id' => $course->opsiMateri->id,
+                'value' => $course->opsiMateri->judul
+            ],
+            'content' => $course->konten
+        ];
+        return view("admin.course-form")->with(['data' => $transformCourse, 'title' => 'Edit Materi']);
     }
 }

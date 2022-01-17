@@ -13,7 +13,8 @@
             <form action="" method="POST">
                 @csrf
                 <input type="text" hidden value={{ $id }} name="courseId">
-                <button type="submit" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Konfirmasi Gabung</button>
+                <button type="submit" class="btn_1 gray approve"><i class="fa fa-fw fa-check-circle-o"></i> Konfirmasi
+                    Gabung</button>
             </form>
         </li>
         {{-- <li><a href="#0" class="btn_1 gray delete"><i class="fa fa-fw fa-times-circle-o"></i> Batalkan</a></li> --}}

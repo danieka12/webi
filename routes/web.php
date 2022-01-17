@@ -103,8 +103,9 @@ Route::prefix("guru")->name('guru.')->group(function () {
         Route::get("/konfirmasi", [GuruController::class, "confirmStudent"])->name("confirmStudent");
 
         Route::get("/materi/tambah", function () {
-            return view("admin.add-course");
+            return view("admin.course-form")->with(['title' => 'Tambah Materi']);
         })->name("addCourse");
+        Route::get("/materi/edit/{materiId}", [CourseController::class, "edit"])->name("editCourse");
 
         Route::get("/profil", function () {
             return view('admin.teacher');
@@ -116,6 +117,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
          */
         Route::post('/materi/delete', [CourseController::class, 'destroy'])->name('course.delete');
         Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
+        Route::put("/materi", [CourseController::class, 'update'])->name('course.update');
         Route::post("/materi/image/upload", [CourseController::class, 'uploadImage'])->name('course.uploadImage');
         Route::get("/materi", [GuruController::class, 'listCourse'])->name('course');
 
