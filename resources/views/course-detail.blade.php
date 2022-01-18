@@ -1,4 +1,4 @@
-@extends('components.app', ['withClass' => true, 'title' => 'Online course detail'])
+@extends('components.app', ['withClass' => true, 'title' => $title])
 
 @section('content')
     <main>

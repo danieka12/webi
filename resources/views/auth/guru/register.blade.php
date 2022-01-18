@@ -3,6 +3,7 @@
     <aside>
         {{-- include guru component --}}
         @include('auth.guru.logo')
+        @include('admin.error-form')
         <form autocomplete="off" action={{ route('guru.register.perform') }} method="post">
             @csrf
             <div class="form-group">

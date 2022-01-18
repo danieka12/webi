@@ -2,9 +2,7 @@
     <div class="intro_title">
         <h2>Guru</h2>
     </div>
-    <p>Zril causae ancillae sit ea. Dicam veritus mediocritatem sea ex, nec id agam eius. Te pri facete latine
-        salutandi, scripta mediocrem et sed, cum ne mundi vulputate. Ne his sint graeco detraxit, posse exerci volutpat
-        has in.</p>
+    <p>{!! $description !!}</p>
     <div class="row add_top_20 add_bottom_30">
         <div class="col-lg-6">
             <ul class="list_teachers">

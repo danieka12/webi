@@ -3,11 +3,12 @@
     <aside>
         {{-- include guru component --}}
         @include('auth.guru.logo')
+        @include('admin.error-form')
         <form method="POST" action={{ route('guru.login.perform') }}>
             @csrf
             <div class="form-group">
                 <span class="input">
-                    <input class="input_field" type="email" autocomplete="off" name="email">
+                    <input class="input_field" type="email" value="{{ old('email') }}" autocomplete="off" name="email">
                     <label class="input_label">
                         <span class="input__label-content">Email</span>
                     </label>
@@ -20,7 +21,7 @@
                     </label>
                 </span>
             </div>
-            <button type="submit" class="btn_1 rounded full-width add_top_30">Masuk ke WEBI (Guru</button>
+            <button type="submit" class="btn_1 rounded full-width add_top_30">Masuk ke WEBI (Guru) </button>
             @include('components.miniComponents.sign-up-by-teacher')
         </form>
         <div class="copy">© 2022 Webi</div>

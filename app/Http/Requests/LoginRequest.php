@@ -2,10 +2,19 @@
 
 namespace App\Http\Requests;
 
+use Helpers\Message;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->message = new Message();
+    }
+
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,43 +39,15 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Get the needed authorization credentials from the request.
+     * Get the error messages for the defined validation rules.
      *
      * @return array
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getCredentials()
+    public function messages()
     {
-        // The form field for providing email or password
-        // have name of "email", however, in order to support
-        // logging users in with both (email and email)
-        // we have to check if user has entered one or another
-        $email = $this->get('email');
-
-        if ($this->isEmail($email)) {
-            return [
-                'email' => $email,
-                'password' => $this->get('password')
-            ];
-        }
-
-        return $this->only('email', 'password');
-    }
-
-    /**
-     * Validate if provided parameter is valid email.
-     *
-     * @param $param
-     * @return bool
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    private function isEmail($param)
-    {
-        $factory = $this->container->make(ValidationFactory::class);
-
-        return !$factory->make(
-            ['email' => $param],
-            ['email' => 'email']
-        )->fails();
+        return [
+            'email.required' => $this->message->getRequired("Email"),
+            'password.required' => $this->message->getRequired("Password"),
+        ];
     }
 }

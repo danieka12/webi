@@ -8,6 +8,7 @@ use App\Models\Penulis;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use Helpers\Message;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -33,12 +34,12 @@ class GuruAuthController extends Controller
         if (!Auth::guard('guru')->attempt(['email' => $guru->email, 'password' => $request->input('password')])) {
             return redirect()->back()->withInput($request->only('email', 'name'));
         }
-        
+
         // create penulis for teachers
         $penulis = new Penulis();
         $penulis['guru_id'] = $guru->id;
         $penulis->save();
-        
+
         return redirect()->route("guru.dashboard")->with('success', "Account successfully registered.");
     }
 
@@ -58,9 +59,10 @@ class GuruAuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->getCredentials();
+        $credentials = $request->only('email', 'password');
         if (!Auth::guard('guru')->attempt($credentials)) {
-            return redirect()->back()->withInput($request->only('email'));
+            $message = new Message();
+            return redirect()->back()->withInput($request->only('email'))->withErrors($message->authenticationFailed());
         }
         return $this->authenticated($request);
     }

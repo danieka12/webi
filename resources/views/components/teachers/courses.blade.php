@@ -15,7 +15,7 @@
                 @foreach ($meta['listCourses'] as $course)
                     <tr>
                         <td>{{ $course['category'] }}</td>
-                        <td><a href="{{ $course['href'] }}">{{ $course['title'] }}</a></td>
+                        <td><a href="/{{ $course['href'] }}">{{ $course['title'] }}</a></td>
                     </tr>
                 @endforeach
             </tbody>
