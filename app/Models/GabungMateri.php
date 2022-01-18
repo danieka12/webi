@@ -18,26 +18,18 @@ class GabungMateri extends Model
         "guru_id",
         "siswa_id",
         "materi_id",
-        "kejelasan_pembelajaran",
-        "kelengkapan_materi",
-        "contoh_penjelasan",
-        "kejelasan_bahasa",
-        "pemahaman_materi",
-        "kemudahan_pemakaian",
+        "konfirmasi_gabung"
     ];
 
-    public function guru()
-    {
+    public function guru() {
         return $this->belongsTo(Guru::class);
     }
 
-    public function siswa()
-    {
+    public function siswa() {
         return $this->belongsTo(Siswa::class);
     }
 
-    public function materi()
-    {
+    public function materi() {
         return $this->belongsTo(Materi::class);
     }
 }
