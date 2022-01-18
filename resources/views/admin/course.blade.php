@@ -14,9 +14,11 @@
                 @include('admin.components.miniComponents.sorting')
                 <div class="list_general reviews">
                     <ul>
-                        @foreach ($courses as $course)
+                        @forElse ($courses as $course)
                             @include('admin.components.miniComponents.card-course', $course)
-                        @endforeach
+                        @empty
+                            @include('admin.components.miniComponents.empty-data')
+                        @endforElse
                     </ul>
                 </div>
             </div>

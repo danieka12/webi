@@ -24,10 +24,20 @@ class GuruController extends Controller
         return view('home.index');
     }
 
-    public function detailTeacher(string $id)
+    public function dashboard()
     {
-        $teacher = ModelsGuru::with(['penulis.materi.gabungMateri', 'mengajar'])->where('id', $id)->get();
+        $teacherId = Auth::guard('guru')->user()->id;
+        $writerId = Penulis::where('guru_id', $teacherId)->firstOrFail()->id;
+        $sizeOfNewConfirm = GabungMateri::query()->where("konfirmasi_gabung", 0)->get();
+        $totalMateri = count(Materi::query()->where('penulis_id', $writerId)->get());
+        $notConfirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get());
+        $confirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', false)->get());
+        $totalMateriTaken = GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get()->toArray();
+        $uniqueTotalMateriToken = empty($totalMateriTaken) ? 0 : count(array_unique(array_column($totalMateriTaken, 'siswa_id')));
+
+        return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm), 'totalMateri' => $totalMateri, 'notConfirm' => $notConfirm, 'confirm' => $confirm, 'totalMateriTaken' => $uniqueTotalMateriToken]);
     }
+
 
     private function href(string $prefix, string $slug, bool $withId = false, string $id = null)
     {

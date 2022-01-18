@@ -49,4 +49,9 @@ class Guru extends Authenticatable
     {
         return $this->hasMany(Mengajar::class);
     }
+
+    public function angket()
+    {
+        return $this->hasMany(Angket::class);
+    }
 }

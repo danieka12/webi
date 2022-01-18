@@ -10,7 +10,7 @@
             maxFilesize: 2, // 2 mb
             acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             init: function() {
-                if ("{{ isset($data['image']['name']) }}") {
+                if ("{{ !empty($data['image']['name']) }}") {
                     var thisDropzone = this;
                     var mockFile = {
                         name: "{{ isset($data['image']) ? $data['image']['name'] : '' }}",
@@ -29,7 +29,7 @@
                 }
 
 
-            },
+        },
         });
         myDropzone.on("success", function(file, response) {
             if (response.success) { // Result

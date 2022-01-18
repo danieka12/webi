@@ -9,10 +9,10 @@
             <div class="col-md-12">
                 <div class="box_general padding_bottom">
                     <div class="header_box version_2">
-                        <h2><i class="fa fa-file"></i>Upload Cover Gambar Materi</h2>
+                        <h2><i class="fa fa-file"></i>Upload Foto Profil</h2>
                     </div>
                     <div class="form-group">
-                        <label>Foto Materi (Cover)</label>
+                        <label>Foto Profil (Guru)</label>
                         <form action={{ route('guru.course.uploadImage') }} class="dropzone">
                             @csrf
                         </form>
@@ -41,15 +41,7 @@
                     </div>
                     <!-- /row-->
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Telepon</label>
-                                <input type="text" class="form-control" name="telp"
-                                    value="{{ isset($data) ? $data['email'] : '' }}"
-                                    placeholder="Your telephone number">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" name="email" class="form-control"

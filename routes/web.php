@@ -6,7 +6,6 @@ use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GuruController;
-use App\Models\GabungMateri;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,10 +90,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
 */
 
     Route::middleware(['auth:guru'])->group(function () {
-        Route::get("/", function () {
-            $sizeOfNewConfirm = GabungMateri::query()->where("konfirmasi_gabung", 0)->get();
-            return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm)]);
-        })->name("dashboard");
+        Route::get("/", [GuruController::class, 'dashboard'])->name("dashboard");
 
 
 

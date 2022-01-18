@@ -2,15 +2,26 @@
     <div class="intro_title">
         <h2>Guru</h2>
     </div>
-    <p>{!! $description !!}</p>
+    @if (isset($description))
+        <p>{!! $description !!}</p>
+    @else
+        <p>Belum ada deskripsi guru.</p>
+    @endif
     <div class="row add_top_20 add_bottom_30">
         <div class="col-lg-6">
             <ul class="list_teachers">
                 <li>
                     <a href={{ route('teacher.profile', ['id' => $guru['id']]) }}>
-                        <figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg" alt="">
+                        <figure>
+                            @if (isset($profile))
+                                <img src={{ asset($profile) }} alt="{{ $teacherName }}">
+                            @else
+                                <img src="http://via.placeholder.com/150x150/ccc/fff/teacher_1_thumb.jpg"
+                                    alt="{{ $teacherName }}">
+
+                            @endif
                         </figure>
-                        <h5>{{ $teacherName }}</h5>
+                        <h5 class="text-capitalize">{{ $teacherName }}</h5>
                         <p>
                             @foreach ($field as $title)
                                 {{ $title }}

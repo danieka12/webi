@@ -53,7 +53,13 @@ class Materi extends Model
         return $this->hasMany(Komentar::class);
     }
 
-    public function mengajar() {
+    public function mengajar()
+    {
         return $this->hasOne(Mengajar::class);
+    }
+
+    public function angket()
+    {
+        return $this->hasMany(Angket::class);
     }
 }

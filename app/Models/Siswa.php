@@ -43,4 +43,9 @@ class Siswa extends Authenticatable
     {
         return $this->hasMany(BalasKomentar::class);
     }
+
+    public function angket()
+    {
+        return $this->hasMany(Angket::class);
+    }
 }
