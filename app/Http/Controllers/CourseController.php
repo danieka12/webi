@@ -169,7 +169,7 @@ class CourseController extends Controller
             });
         } else {
             $opsiMateri = OpsiMateri::with("materi.materiCoverGambar")->get();
-            $courseListDB = Materi::with(["materiCoverGambar", "opsiMateri"])->limit(9)->get();
+            $courseListDB = Materi::with(["materiCoverGambar", "opsiMateri"])->get();
             $courseList = collect($courseListDB)->map(function ($courseList) {
                 return  [
                     'courseLabel' => $courseList['opsiMateri']['judul'],

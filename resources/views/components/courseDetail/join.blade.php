@@ -5,6 +5,8 @@
         </span>
     </div>
 @endif
+<div id="message-contact"></div>
+
 
 <div class="box_detail">
     <h4 class="text-center">{{ $titleBtn }}</h4>
@@ -16,7 +18,6 @@
         </p>
 
     @endif
-    <div id="message-contact"></div>
     <form id="contactform" method="POST" action={{ route('course.join.post') }} autocomplete="off">
         <div class="row">
             <input type="hidden" id="slug" name="slug" value={{ $slug }}>
@@ -34,7 +35,7 @@
                         {{ $titleBtn }}
                     </a>
                 @endif
-                @if (Auth::guard('siswa')->check() && $hasTaken && !$hasConfirm)
+                @if (Auth::guard('siswa')->check() && !$hasTaken && !$hasConfirm)
                     <button type="submit" class="btn_1 full-width" id="submit-course">
                         {{ $titleBtn }}
                     </button>

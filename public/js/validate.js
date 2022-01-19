@@ -54,12 +54,22 @@ jQuery(document).ready(function () {
                     user_id: $("#user_id").val(),
                 },
                 function (data) {
-                    document.getElementById("message-contact").innerHTML = data;
+                    if (data.success) {
+                        $('#message-contact').append(`
+                            <div class="alert alert-success mt-3" role="alert">
+                                <span class="text-sm">
+                                    Selamat, anda sudah mengambil materi ini. Silahkan tunggu konfirmasi dari guru pengampu mata pelajaran.
+                                </span>
+                            </div>
+                        `)
+                        $('#submit-course').attr('disabled', true);
+                    } else {
+                        $("#submit-course").removeAttr("disabled");
+                    }
                     $("#message-contact").slideDown("slow");
                     $("#contactform .loader").fadeOut("slow", function () {
                         $(this).remove();
                     });
-                    $("#submit-course").removeAttr("disabled");
                     if (data.match("success") != null)
                         $("#contactform").slideUp("slow");
                 }

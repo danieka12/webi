@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Angket as AngketRequest;
 use App\Models\Angket;
-use Illuminate\Http\Request;
 
 class AngketController extends Controller
 {

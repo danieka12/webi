@@ -1,1 +1,1 @@
-<div class="copy">© 2021 WEBI (Web Interaktif)</div>
+<div class="copy">© 2022 WEBI (Web Interaktif)</div>
