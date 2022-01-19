@@ -162,7 +162,7 @@ class CourseController extends Controller
                     'title' => $courseList['judul'],
                     'desc' => $courseList['konten'],
                     'timeToComplete' => $courseList['durasi'],
-                    'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
+                    'previewImage' => $courseList['materiCoverGambar']['cover'],
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
                     'hasEnroll' => false
                 ];
@@ -176,7 +176,7 @@ class CourseController extends Controller
                     'title' => $courseList['judul'],
                     'desc' => $courseList['konten'],
                     'timeToComplete' => $courseList['durasi'],
-                    'previewImage' => 'http://via.placeholder.com/450x333/ccc/fff/ course__list_1.jpg',
+                    'previewImage' => $courseList['materiCoverGambar']['cover'],
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
                     'hasEnroll' => false
                 ];
@@ -285,6 +285,25 @@ class CourseController extends Controller
         return redirect()->route("guru.course")->with(['msg' => "Materi berhasil diubah!"]);
     }
 
+    private function durationHandler(?string $hour, ?string $minute)
+    {
+        if (isset($hour)) {
+            return $hour  . " Jam " . $minute . " Menit";
+        } else {
+            return $minute . " Menit";
+        }
+
+
+        if (isset($minute)) {
+            return $hour  . " Jam " . $minute . " Menit";
+        } else {
+            return $hour  . " Jam ";
+        }
+
+
+        return false;
+    }
+
 
     public function create(CourseRequest $request)
     {
@@ -294,9 +313,13 @@ class CourseController extends Controller
         $materiCoverGambar = new MateriCoverGambar;
 
 
+        $duration = $this->durationHandler($course['durationHour'], $course['durationMinute']);
+        if (!$duration) {
+            return view("admin.course-form")->with(['title' => 'Tambah Materi']);
+        }
         $courseModel['opsi_materi_id'] = $request->categoryId;
         $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
-        $courseModel->durasi = $course['durationHour']  . " Jam " . $course['durationMinute'] . " Menit";
+        $courseModel->durasi = $duration;
         $courseModel->judul = $course['title'];
         $courseModel->konten = $course['content'];
         $courseModel->save();

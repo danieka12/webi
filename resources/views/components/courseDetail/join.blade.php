@@ -7,7 +7,6 @@
 @endif
 <div id="message-contact"></div>
 
-
 <div class="box_detail">
     <h4 class="text-center">{{ $titleBtn }}</h4>
     @if (!$hasTaken || !$hasConfirm)

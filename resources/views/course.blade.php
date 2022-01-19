@@ -24,14 +24,14 @@
             </div>
             <!-- /row -->
 
-            @if (count($courseList) >= 9)
+            {{-- @if (count($courseList) >= 9)
                 <p class="text-center"><a href="#0" class="btn_1 rounded add_top_30">Lihat Materi Lain</a></p>
-            @endif
+            @endif --}}
 
         </div>
         <!-- /container -->
 
-        @include('components.course.footer')
+        {{-- @include('components.course.footer') --}}
         <!-- /bg_color_1 -->
     </main>
     <!--/main-->

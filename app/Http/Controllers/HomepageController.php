@@ -32,8 +32,8 @@ class HomepageController extends Controller
                 'courseLabel' => $courseList['opsiMateri']['judul'],
                 'title' => $courseList['judul'],
                 'desc' => $courseList['konten'],
-                'timeToComplete' => '1h 30min',
-                'previewImage' => 'http://via.placeholder.com/800x533/ccc/fff/ course__list_1.jpg',
+                'timeToComplete' => $courseList['durasi'],
+                'previewImage' => $courseList['materiCoverGambar']['cover'],
                 'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
                 'hasEnroll' => false
             ];
