@@ -15,7 +15,7 @@ class OpsiMateriFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'judul' => $this->faker->sentence(5)
+            'judul' => $this->faker->sentence(3)
         ];
     }
 }

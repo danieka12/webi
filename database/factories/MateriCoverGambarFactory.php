@@ -16,7 +16,7 @@ class MateriCoverGambarFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'cover' => $this->faker->image()
+            'cover' => 'http://via.placeholder.com/250x250'
         ];
     }
 }

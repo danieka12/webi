@@ -17,7 +17,7 @@ class PenulisFactory extends Factory
     {
         return [
             'id' => $this->faker->uuid(),
-            'foto_profile' => $this->faker->image(),
+            'foto_profile' => 'http://via.placeholder.com/250x250',
             'description' => Content::teacherExampleDescription()
         ];
     }
