@@ -3,7 +3,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Web pembelajaran interaktif">
-    <meta name="author" content="Adjie">
+    <meta name="author" content="Adjie Takbir Ramadhan">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>{{ isset($title) ? "WEBI | " . $title : "WEBI Pembelajaran Interaktif" }}</title>
 

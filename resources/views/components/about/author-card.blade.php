@@ -21,7 +21,7 @@
                     id legimus torquatos cotidieque, usu decore <strong>percipitur definitiones</strong> ex, nihil
                     utinam recusabo mel no. Dolores reprehendunt no sit, quo cu viris theophrastus. Sit unum efficiendi
                     cu.</p>
-                <p><em>Peneliti Adjie</em></p>
+                <p><em>Peneliti Adjie Takbir Ramadhan</em></p>
             </div>
         </div>
         <!--/row-->
