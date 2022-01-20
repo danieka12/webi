@@ -24,6 +24,25 @@ class GuruController extends Controller
         return view('home.index');
     }
 
+    private function month(String $teacherId)
+    {
+        $period = now()->subMonths(12)->monthsUntil(now());
+        $data = [];
+        foreach ($period as $date) {
+            $totalMateriTaken = GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->whereYear('created_at', '=', $date->year)->whereMonth('created_at', '=', $date->month)->get()->toArray();
+            $uniqueTotalMateriToken = empty($totalMateriTaken) ? 0 : count(array_unique(array_column($totalMateriTaken, 'siswa_id')));
+
+
+            $data[] = [
+                'month' => $date->shortMonthName,
+                'year' => $date->year,
+                'totalStudent' => $uniqueTotalMateriToken,
+            ];
+        }
+
+        return $data;
+    }
+
     public function dashboard()
     {
         $teacherId = Auth::guard('guru')->user()->id;
@@ -35,7 +54,17 @@ class GuruController extends Controller
         $totalMateriTaken = GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get()->toArray();
         $uniqueTotalMateriToken = empty($totalMateriTaken) ? 0 : count(array_unique(array_column($totalMateriTaken, 'siswa_id')));
 
-        return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm), 'totalMateri' => $totalMateri, 'notConfirm' => $notConfirm, 'confirm' => $confirm, 'totalMateriTaken' => $uniqueTotalMateriToken]);
+        $statistic = $this->month($teacherId);
+        $stat = [
+            'labels' => collect($statistic)->map(function ($item) {
+                return $item['month'] . " " . $item['year'];
+            }),
+            'value' => collect($statistic)->map(function ($item) {
+                return $item['totalStudent'];
+            })
+        ];
+
+        return view('admin.dashboard')->with(['sizeConfirm' => count($sizeOfNewConfirm), 'totalMateri' => $totalMateri, 'notConfirm' => $notConfirm, 'confirm' => $confirm, 'totalMateriTaken' => $uniqueTotalMateriToken, 'stat' => $stat]);
     }
 
 

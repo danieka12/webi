@@ -12,6 +12,4 @@
 <script src={{ asset('vendor/jquery.magnific-popup.min.js') }}></script>
 <!-- Custom scripts for all pages-->
 <script src={{ asset('js/admin/admin.js') }}></script>
-<!-- Custom scripts for this page-->
-<script src={{ asset('js/admin/admin-charts.js') }}></script>
 @stack('scripts')

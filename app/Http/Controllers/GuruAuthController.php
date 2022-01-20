@@ -78,7 +78,7 @@ class GuruAuthController extends Controller
      */
     protected function authenticated(FormRequest $request, $user = "")
     {
-        return redirect()->intended();
+        return redirect()->intended(route('guru.dashboard'));
     }
 
 
