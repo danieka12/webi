@@ -13,10 +13,9 @@
     </div>
 
 </div>
+@include('components.course.has-enroll')
 <ul>
     <li><i class="icon_clock_alt"></i> {{ $timeToComplete }}</li>
-    @if ($hasEnroll)
-        <li class="text-success"><i class="icon_check"></i> Telah Diambil</li>
-    @endif
+
     <li><a href={{ $href }}>{{ $hasEnroll ? 'Buka' : 'Ambil' }} Materi</a></li>
 </ul>

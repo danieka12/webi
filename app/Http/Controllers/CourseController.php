@@ -30,6 +30,16 @@ class CourseController extends Controller
         return explode(".", $params)[1];
     }
 
+    private function hasEnroll(?String $materiId, ?String $siswaId)
+    {
+        $hasEnroll = false;
+        if ($siswaId) {
+            $gabungMateri = GabungMateri::where('materi_id', $materiId)->where('siswa_id', $siswaId)->first();
+            if ($gabungMateri) $hasEnroll = true;
+        }
+        return $hasEnroll;
+    }
+
 
     private function imageHandler(?string $path)
     {
@@ -146,6 +156,7 @@ class CourseController extends Controller
     {
         $opsiMateri = [];
         $courseList = [];
+        $siswaId = false;
         $courseLabelList = collect(OpsiMateri::limit(8)->get())->map(function ($query) {
             return [
                 'id' => $query['id'],
@@ -153,10 +164,14 @@ class CourseController extends Controller
             ];
         });
 
+        if (Auth::guard('siswa')->check()) {
+            $siswaId = Auth::guard('siswa')->user()->id;
+        }
+
         if ($label != "semua") {
             $opsiMateri = OpsiMateri::with("materi.materiCoverGambar")->where('judul', 'LIKE', "%" . $this->revertSlug($label) . "%")->first();
 
-            $courseList = collect($opsiMateri['materi'])->map(function ($courseList) use ($opsiMateri) {
+            $courseList = collect($opsiMateri['materi'])->map(function ($courseList) use ($opsiMateri, $siswaId) {
                 return  [
                     'courseLabel' => $opsiMateri['judul'],
                     'title' => $courseList['judul'],
@@ -164,13 +179,13 @@ class CourseController extends Controller
                     'timeToComplete' => $courseList['durasi'],
                     'previewImage' => $courseList['materiCoverGambar']['cover'],
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
-                    'hasEnroll' => false
+                    'hasEnroll' => $this->hasEnroll($courseList['id'], $siswaId)
                 ];
             });
         } else {
             $opsiMateri = OpsiMateri::with("materi.materiCoverGambar")->get();
             $courseListDB = Materi::with(["materiCoverGambar", "opsiMateri"])->get();
-            $courseList = collect($courseListDB)->map(function ($courseList) {
+            $courseList = collect($courseListDB)->map(function ($courseList) use ($siswaId) {
                 return  [
                     'courseLabel' => $courseList['opsiMateri']['judul'],
                     'title' => $courseList['judul'],
@@ -178,12 +193,51 @@ class CourseController extends Controller
                     'timeToComplete' => $courseList['durasi'],
                     'previewImage' => $courseList['materiCoverGambar']['cover'],
                     'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
-                    'hasEnroll' => false
+                    'hasEnroll' => $this->hasEnroll($courseList['id'], $siswaId)
                 ];
             });
         }
 
         return view('course')->with(['labelTitle' => !isset($opsiMateri['judul']) ? "Semua" : $opsiMateri['judul'], 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
+    }
+
+
+
+    public function search(Request $request)
+    {
+        $label = $request->query('q');
+        $materi = [];
+        $courseList = [];
+        $siswaId = false;
+        $courseLabelList = collect(OpsiMateri::limit(8)->get())->map(function ($query) {
+            return [
+                'id' => $query['id'],
+                'title' => $this->strLimit($query['judul'], 10)
+            ];
+        });
+
+        $materi = Materi::with(["materiCoverGambar", "opsiMateri"])->where('judul', 'LIKE', "%" . $label . "%")->get();
+
+        if (Auth::guard('siswa')->check()) {
+            $siswaId = Auth::guard('siswa')->user()->id;
+        }
+
+
+        $courseList = collect($materi)->map(function ($materi) use ($siswaId) {
+
+
+            return  [
+                'courseLabel' => $materi['opsiMateri']['judul'],
+                'title' => $materi['judul'],
+                'desc' => $materi['konten'],
+                'timeToComplete' => $materi['durasi'],
+                'previewImage' => $materi['materiCoverGambar']['cover'],
+                'href' =>  $this->href('materi/detail/', $materi['judul'], true, $materi['id']),
+                'hasEnroll' => $this->hasEnroll($materi['id'], $siswaId)
+            ];
+        });
+
+        return view('course')->with(['labelTitle' => $label, 'courseList' => $courseList, 'courseLabelList' => $courseLabelList]);
     }
 
     public function uploadImage(Request $request)

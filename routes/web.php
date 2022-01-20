@@ -25,6 +25,7 @@ Route::get("/", [HomepageController::class, 'index'])->name("homepage");
 
 Route::name("course.")->group(function () {
 
+    Route::get('/materi/search', [CourseController::class, 'search'])->name('search-by');
     Route::get('/materi/{label?}', [CourseController::class, 'filterCourseByLabel'])->name('search');
     Route::get('/materi/detail/{slug}', [CourseController::class, 'detail'])->name('detail');
 
