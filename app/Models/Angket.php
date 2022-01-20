@@ -11,7 +11,7 @@ class Angket extends Model
     use HasFactory;
     use Uuid;
 
-    protected $table = 'gabung_materi'; // renaming table name
+    protected $table = 'angket'; // renaming table name
     public $incrementing = false;
     public $keyType = 'uuid';
     protected $fillable = [

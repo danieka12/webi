@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AngketController;
 use App\Http\Controllers\CategoryCourseController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GuruAuthController;
@@ -32,6 +33,7 @@ Route::name("course.")->group(function () {
         Route::get("/materi/baca/{slug}", [CourseController::class, 'readCourse'])->name('read');
         Route::post("/materi/gabung", [CourseController::class, 'joinCourse'])->name('join.post');
         Route::post('/komentar', [CourseController::class, 'comments'])->name('comments.create');
+        Route::post('/angket', [AngketController::class, 'store'])->name('angket.create');
     });
 });
 

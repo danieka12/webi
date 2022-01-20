@@ -19,7 +19,16 @@
                     ])
                     <!-- /single-post -->
 
-
+                    @if (!$toRead['hasFillSurvey'])
+                        @include('components.readCourse.survey', ['courseId' => $toRead['id'], 'slug' => $toRead['slug'] ,
+                        'guruId' =>
+                        $toRead['teacherId']])
+                    @else
+                        <div class="alert alert-success" role="alert">
+                            Terima kasih telah mengisi formulir angket. Hasil angketmu sudah
+                            disimpan didalam data WEBI.
+                        </div>
+                    @endif
                     <hr>
                     @include('components.readCourse.comments', ['comments' => $toRead['comments'], 'countComment' =>
                     count($toRead['comments'])])

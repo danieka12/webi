@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentsRequest;
 use App\Http\Requests\CourseRequest;
-
+use App\Models\Angket;
 use App\Models\GabungMateri;
 use App\Models\Guru;
 use App\Models\Komentar;
@@ -197,6 +197,7 @@ class CourseController extends Controller
     public function readCourse(string $slug)
     {
         $courseId = $this->getId($slug);
+        $userId = Auth::guard('siswa')->user()->id;
         $toRead = Materi::with([
             'materiCoverGambar',
             'opsiMateri',
@@ -208,6 +209,13 @@ class CourseController extends Controller
             'penulis.guru'
         ])->where("id", $courseId)->firstOrFail();
 
+        $angketModel = Angket::where('materi_id', $courseId)->where('siswa_id', $userId)->first();
+        $hasFillSurvey = false;
+
+        if (!empty($angketModel)) {
+            $hasFillSurvey = true;
+        }
+
         $collectionToRead =
             [
                 'id' => $toRead['id'],
@@ -217,6 +225,8 @@ class CourseController extends Controller
                 'coverImage' => $toRead['materiCoverGambar']['judul'],
                 'createdAt' => $this->transformDate($toRead['comments']),
                 'teacher' => $toRead['penulis']['guru']['name'],
+                'hasFillSurvey' => $hasFillSurvey,
+                'slug' => $slug,
                 'comments' => collect($toRead['komentar'])->map(function ($comment) {
                     return [
                         'id' => $comment['id'],
