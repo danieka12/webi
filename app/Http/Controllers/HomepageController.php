@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GabungMateri;
 use App\Models\Materi;
 use App\Models\OpsiMateri;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 
@@ -19,15 +21,31 @@ class HomepageController extends Controller
         return $prefix . Str::slug($slug);
     }
 
+    private function hasEnroll(?String $materiId, ?String $siswaId)
+    {
+        $hasEnroll = false;
+        if ($siswaId) {
+            $gabungMateri = GabungMateri::where('materi_id', $materiId)->where('siswa_id', $siswaId)->first();
+            if ($gabungMateri) $hasEnroll = true;
+        }
+        return $hasEnroll;
+    }
+
     public function index()
     {
+        $siswaId = false;
+
+        if (Auth::guard('siswa')->check()) {
+            $siswaId = Auth::guard('siswa')->user()->id;
+        }
+
         $courseLabel = collect(OpsiMateri::all()->take(5))->map(function ($courseLabel) {
             return [
                 'title' => $courseLabel['judul'],
                 'href' => $this->href('materi/', $courseLabel['judul']),
             ];
         });
-        $courseList = collect(Materi::with(["opsiMateri", "materiCoverGambar"])->take(15)->get())->map(function ($courseList) {
+        $courseList = collect(Materi::with(["opsiMateri", "materiCoverGambar"])->take(15)->get())->map(function ($courseList) use ($siswaId) {
             return  [
                 'courseLabel' => $courseList['opsiMateri']['judul'],
                 'title' => $courseList['judul'],
@@ -35,7 +53,7 @@ class HomepageController extends Controller
                 'timeToComplete' => $courseList['durasi'],
                 'previewImage' => $courseList['materiCoverGambar']['cover'],
                 'href' =>  $this->href('materi/detail/', $courseList['judul'], true, $courseList['id']),
-                'hasEnroll' => false
+                'hasEnroll' => $this->hasEnroll($courseList['id'], $siswaId)
             ];
         });
         $courseCategory = collect(OpsiMateri::take(6)->withCount('materi')->get())->map(function ($courseCategory) {

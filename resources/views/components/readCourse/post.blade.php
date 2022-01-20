@@ -1,5 +1,5 @@
 <div class="bloglist singlepost">
-    <p><img alt="" class="img-fluid img-responsive" src="{{ asset($coverImage) }}"></p>
+    <p><img style="width:100%;max-height:700px" alt="" class="img-fluid img-responsive" src="{{ asset($coverImage) }}"></p>
     <h1 class="text-capitalize">{{ $title }}</h1>
     <div class="postmeta">
         <ul>
