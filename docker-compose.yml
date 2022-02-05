@@ -1,0 +1,55 @@
+version: "2.0"
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: cloudsigma.com/php
+        container_name: app
+        restart: unless-stopped
+        tty: true
+        environment:
+            SERVICE_NAME: webi
+            SERVICE_TAGS: production
+        working_dir: /var/www/html/
+        volumes:
+            - "./:/var/www/html/"
+            - "./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini"
+        networks:
+            - webi-network
+    webserver:
+        image: "nginx:alpine"
+        container_name: webserver
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - "./:/var/www/html/"
+            - "./nginx/conf.d/:/etc/nginx/conf.d/"
+        networks:
+            - webi-network
+    db:
+        image: "mysql:5.7.32"
+        container_name: db
+        restart: unless-stopped
+        tty: true
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: webidb
+            MYSQL_ROOT_PASSWORD: webi
+            SERVICE_TAGS: production
+            SERVICE_NAME: mysql
+        volumes:
+            - "dbdata:/var/lib/mysql"
+            - "./mysql/my.cnf:/etc/mysql/my.cnf"
+        networks:
+            - webi-network
+networks:
+    webi-network:
+        driver: bridge
+volumes:
+    dbdata:
+        driver: local
