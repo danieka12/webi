@@ -42,6 +42,9 @@ RUN chown -R www-data:www-data \
      /var/www/html/bootstrap/cache
 
 RUN chmod -R 777 /var/www/html/storage
+RUN mkdir /var/www/html/public/images/upload
+RUN chmod -R 777 /var/www/html/public/images/upload
+
 
 # Expose port 9000 and start php-fpm server (for FastCGI Process Manager)
 EXPOSE 9000
