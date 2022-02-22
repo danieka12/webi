@@ -34,4 +34,22 @@ class CourseRequest extends FormRequest
             'image' => 'required',
         ];
     }
+
+    /**
+     * Get the validation messages that apply to the request.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'title.required' => "Username tidak boleh kosong",
+            'durationHour.required' => "Durasi materi (Jam) tidak boleh kosong",
+            'durationMinute.required' => "Durasi materi (menit) tidak boleh kosong",
+            'description.required' => "Tujuan pembelajaran tidak boleh kosong",
+            'content.required' => "Materi tidak boleh kosong",
+            'image.required' => "Cover gambar tidak boleh kosong",
+            'categoryId.required' => "Kategori materi tidak boleh kosong",
+        ];
+    }
 }

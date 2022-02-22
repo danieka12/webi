@@ -95,8 +95,6 @@ Route::prefix("guru")->name('guru.')->group(function () {
     Route::middleware(['auth:guru'])->group(function () {
         Route::get("/", [GuruController::class, 'dashboard'])->name("dashboard");
 
-
-
         Route::get("/materi/tambah", function () {
             return view("admin.course-form")->with(['title' => 'Tambah Materi']);
         })->name("addCourse");

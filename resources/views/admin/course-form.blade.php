@@ -1,7 +1,6 @@
 @extends('admin.components.app')
 
 @section('body')
-
     <div class="content-wrapper">
         <!-- Breadcrumbs-->
         @include('admin.components.miniComponents.breadcrumbs', ['currentPage' => $title])
@@ -12,7 +11,9 @@
                     <h2><i class="fa fa-file"></i>Upload Cover Gambar Materi</h2>
                 </div>
                 <div class="form-group">
-                    <label>Foto Materi (Cover)</label>
+                    <label>Foto Materi (Cover)
+                        @include('admin.components.miniComponents.required-fill')
+                    </label>
                     @if (isset($data))
                         <form action={{ route('guru.course.uploadImage') }} class="dropzone">
                         @else
@@ -47,7 +48,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Judul Materi</label>
+                            <label>Judul Materi @include('admin.components.miniComponents.required-fill')</label>
                             <input type="text" name="title" class="form-control" placeholder="Judul Materi"
                                 value="{{ isset($data) ? $data['title'] : '' }}">
                         </div>
@@ -56,14 +57,16 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Durasi Materi (Jam)</label>
+                                    <label>Durasi Materi (Jam)
+                                        @include('admin.components.miniComponents.required-fill')</label>
                                     <input type="text" name="durationHour" class="form-control"
                                         value="{{ isset($data) ? $data['durationHour'] : '' }}" placeholder="1 Jam">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Durasi Materi (Menit)</label>
+                                    <label>Durasi Materi (Menit)
+                                        @include('admin.components.miniComponents.required-fill')</label>
                                     <input type="text" name="durationMinute" class="form-control"
                                         value="{{ isset($data) ? $data['durationMinute'] : '' }}" placeholder="30 Menit">
                                 </div>
@@ -83,9 +86,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Tujuan Pembelajaran</label>
+                            <label>Tujuan Pembelajaran @include('admin.components.miniComponents.required-fill')</label>
                             @include('admin.components.miniComponents.ckeditor', ['name' => 'description', 'defaultValue' =>
-                            isset($data) ? $data['description'] : ""])
+                            isset($data) ? $data['description'] : old('description')])
                         </div>
                     </div>
                 </div>
@@ -94,9 +97,9 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {{-- <label>Category <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label> --}}
-                            <label>Kategori Materi</label>
+                            <label>Kategori Materi @include('admin.components.miniComponents.required-fill')</label>
                             @include('admin.components.miniComponents.select2', ['name' => 'categoryId', 'placeholder' =>
-                            'Pilih Kategori Materi', 'defaultValue' => isset($data) ? $data['category'] : null,
+                            'Pilih Kategori Materi', 'defaultValue' => isset($data) ? $data['category'] : old('category'),
                             'route' => route('guru.categories')])
                         </div>
                     </div>
@@ -107,7 +110,8 @@
 
             @include('admin.components.miniComponents.wyswyg', ['title' => 'Tulis Materi', 'name' => 'content',
             'description' => 'Tulis Materi Disini',
-            'defaultValue' => isset($data) ? $data['content'] : ""])
+            'required' => true,
+            'defaultValue' => isset($data) ? $data['content'] : old('content')])
             <p><button type="submit" class="btn_1 medium">Simpan Materi</button></p>
         </div>
         </form>
