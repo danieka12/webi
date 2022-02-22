@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label>Judul Materi @include('admin.components.miniComponents.required-fill')</label>
                             <input type="text" name="title" class="form-control" placeholder="Judul Materi"
-                                value="{{ isset($data) ? $data['title'] : '' }}">
+                                value="{{ isset($data) ? $data['title'] : old('title') }}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -59,16 +59,18 @@
                                 <div class="form-group">
                                     <label>Durasi Materi (Jam)
                                         @include('admin.components.miniComponents.required-fill')</label>
-                                    <input type="text" name="durationHour" class="form-control"
-                                        value="{{ isset($data) ? $data['durationHour'] : '' }}" placeholder="1 Jam">
+                                    <input type="number" min="0" max="100" name="durationHour" class="form-control"
+                                        value="{{ isset($data) ? $data['durationHour'] : old('durationHour') }}"
+                                        placeholder="1 Jam">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Durasi Materi (Menit)
                                         @include('admin.components.miniComponents.required-fill')</label>
-                                    <input type="text" name="durationMinute" class="form-control"
-                                        value="{{ isset($data) ? $data['durationMinute'] : '' }}" placeholder="30 Menit">
+                                    <input type="number" min="0" max="60" name="durationMinute" class="form-control"
+                                        value="{{ isset($data) ? $data['durationMinute'] : old('durationMinute') }}"
+                                        placeholder="30 Menit">
                                 </div>
                             </div>
                         </div>
@@ -121,3 +123,17 @@
 @endsection
 
 @include('admin.components.scriptUploadImage')
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('input[type="number"]').on('keyup', function() {
+                v = parseInt($(this).val());
+                min = parseInt($(this).attr('min'));
+                max = parseInt($(this).attr('max'));
+                if (v > max) {
+                    $(this).val(max);
+                }
+            })
+        })
+    </script>
+@endpush
