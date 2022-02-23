@@ -97,6 +97,10 @@ class CourseController extends Controller
             $query->where('konfirmasi_gabung', '=', true);
         }])->where("id", $courseId)->first();
 
+        $gabungMateri = GabungMateri::query()
+        ->where("siswa_id", $user)
+        ->where("materi_id", $course->id)->first();
+
         $metaData = [
             'duration' => $course['durasi'],
             'takeBy' => $course['gabung_materi_count'],
@@ -116,9 +120,7 @@ class CourseController extends Controller
             'hasTaken' => $user ? !is_null(GabungMateri::query()
                 ->where("siswa_id", $user)
                 ->where("materi_id", $course->id)->first()) : $user,
-            'hasConfirm' => $user ? GabungMateri::query()
-                ->where("siswa_id", $user)
-                ->where("materi_id", $course->id)->first()['konfirmasi_gabung'] : $user,
+            'hasConfirm' => $user && isset($gabungMateri['konfirmasiGabung']) ? $gabungMateri['konfirmasi_gabung'] : $user,
             'slug' => $slug,
         ];
 
@@ -445,6 +447,6 @@ class CourseController extends Controller
         $commentInstance['konten'] = $comments['comments'];
         $commentInstance->save();
 
-        return redirect()->action([CourseController::class, 'readCourse'], ["slug" => $this->href("/materi/baca/", $course['judul'], true, $course['id'])]);
+        return redirect()->back();
     }
 }
