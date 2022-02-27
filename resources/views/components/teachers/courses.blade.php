@@ -7,7 +7,7 @@
         <table class="table table-striped add_bottom_30">
             <thead>
                 <tr>
-                    <th>Kategori Materi</th>
+                    <th>Mata Pelajaran</th>
                     <th>Judul Materi</th>
                 </tr>
             </thead>

@@ -5,10 +5,10 @@
         @include('components.homepage.hero')
         <!-- /hero_single -->
 
-        @include('components.homepage.popular', ['title' => 'Kursus Tersedia Untukmu', 'desc' => 'Banyak pilihan materi untuk kamu pelajari', 'titlePreview' => 'Buka Materi'])
+        @include('components.homepage.popular', ['title' => 'Kursus Tersedia Untukmu', 'desc' => 'Banyak pilihan mata pelajaran untuk kamu pelajari', 'titlePreview' => 'Buka Materi'])
         <!-- /popular_content -->
 
-        @include('components.homepage.course', ['title' => 'Opsi Materi Yang Bisa Kamu Pilih', 'desc' => 'Bisa pilih berdasarkan opsi materi.'])
+        @include('components.homepage.course', ['title' => 'Mata Pelajaran Yang Bisa Kamu Pilih', 'desc' => 'Bisa pilih berdasarkan mata pelajaran.'])
         <!-- /course_content -->
 
         @include('components.homepage.news-and-event', ['title' => 'Berita dan Acara', 'desc' => 'Berita & acara mendatang.'])

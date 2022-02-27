@@ -7,6 +7,7 @@ use App\Http\Controllers\GuruAuthController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\PopulateDataController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get("/", [HomepageController::class, 'index'])->name("homepage");
+
+// purpose test only
+Route::name('test.')->prefix("populate")->group(function () {
+    Route::get("/opsi-materi", [PopulateDataController::class, 'optionCategory'])->name('optionMateri');
+});
 
 Route::name("course.")->group(function () {
 

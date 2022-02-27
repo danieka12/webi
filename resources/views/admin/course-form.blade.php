@@ -99,7 +99,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             {{-- <label>Category <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label> --}}
-                            <label>Kategori Materi @include('admin.components.miniComponents.required-fill')</label>
+                            <label>Mata Pelajaran @include('admin.components.miniComponents.required-fill')</label>
                             @include('admin.components.miniComponents.select2', ['name' => 'categoryId', 'placeholder' =>
                             'Pilih Kategori Materi', 'defaultValue' => isset($data) ? $data['category'] : old('category'),
                             'route' => route('guru.categories')])
