@@ -2,8 +2,7 @@
 
 @section('content')
     <main>
-        @include('components.about.author-card', ['title' => 'Tentang Peneliti WEBI', 'desc' => 'Cum doctus civibus
-        efficiantur in imperdiet deterruisset.'])
+        @include('components.about.author-card', ['title' => 'Tentang Peneliti WEBI', 'desc' => 'Informasi Detail Tentang WEBI.'])
     </main>
     <!-- /main -->
 @endsection
