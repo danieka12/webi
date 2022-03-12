@@ -19,7 +19,7 @@ class CreateMaterisTable extends Migration
             $table->uuid('penulis_id');
             $table->string('judul', 100);
             $table->string('durasi', 25);
-            $table->text('konten');
+            $table->longText('konten');
             $table->timestamps();
 
             $table->foreign('opsi_materi_id')->references('id')->on('opsi_materi')->onDelete('cascade');

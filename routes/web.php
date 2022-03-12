@@ -115,6 +115,7 @@ Route::prefix("guru")->name('guru.')->group(function () {
         Route::post('/materi', [CourseController::class, 'create'])->name('course.create');
         Route::put("/materi", [CourseController::class, 'update'])->name('course.update');
         Route::post("/materi/image/upload", [CourseController::class, 'uploadImage'])->name('course.uploadImage');
+        Route::post("/materi/course/upload", [CourseController::class, 'uploadImageCourse'])->name('course.uploadImageCourse');
         Route::get("/materi", [GuruController::class, 'listCourse'])->name('course');
 
         Route::get('/categories', [CategoryCourseController::class, 'index'])->name('categories');

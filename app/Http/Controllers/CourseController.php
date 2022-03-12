@@ -15,6 +15,7 @@ use App\Models\Penulis;
 use App\Models\TujuanPembelajaran;
 
 use Carbon\Carbon;
+use DOMDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -98,8 +99,8 @@ class CourseController extends Controller
         }])->where("id", $courseId)->first();
 
         $gabungMateri = GabungMateri::query()
-        ->where("siswa_id", $user)
-        ->where("materi_id", $course->id)->first();
+            ->where("siswa_id", $user)
+            ->where("materi_id", $course->id)->first();
 
         $metaData = [
             'duration' => $course['durasi'],
@@ -332,14 +333,14 @@ class CourseController extends Controller
         $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
         $courseModel->durasi = $course['durationHour']  . " Jam " . $course['durationMinute'] . " Menit";
         $courseModel->judul = $course['title'];
-        $courseModel->konten = $course['content'];
+        $courseModel->konten = $this->base64Processing($course['content']);
         $courseModel->save();
 
 
         // TODO: Update the courseMeta
         $courseMeta['materi_id'] = $courseModel->id;
         $courseMeta['guru_id'] = $request->guruId;
-        $courseMeta->description = $course['description'];
+        $courseMeta->description = $this->base64Processing($course['description']);
         $courseMeta->save();
 
 
@@ -358,16 +359,34 @@ class CourseController extends Controller
         } else {
             return $minute . " Menit";
         }
-
-
         if (isset($minute)) {
             return $hour  . " Jam " . $minute . " Menit";
         } else {
             return $hour  . " Jam ";
         }
-
-
         return false;
+    }
+
+    public function base64Processing($description)
+    {
+        $dom = new DOMDocument();
+        $dom->loadHtml($description, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $k => $img) {
+            $data = $img->getAttribute('src');
+            $extension = explode('/', mime_content_type($data))[1];
+            list($type, $data) = explode(';', $data);
+            list(, $data)      = explode(',', $data);
+            $data = base64_decode($data);
+            $imageName = time() . $k . '.' . $extension;
+            $path = public_path($this->locationImage . "/" . $imageName);
+            file_put_contents($path, $data);
+            $img->removeAttribute('src');
+            $img->setAttribute('src', asset($this->locationImage . "/" . $imageName));
+        }
+
+        return $dom->saveHTML();
     }
 
 
@@ -378,7 +397,6 @@ class CourseController extends Controller
         $courseMeta = new TujuanPembelajaran;
         $materiCoverGambar = new MateriCoverGambar;
 
-
         $duration = $this->durationHandler($course['durationHour'], $course['durationMinute']);
         if (!$duration) {
             return view("admin.course-form")->with(['title' => 'Tambah Materi']);
@@ -387,12 +405,12 @@ class CourseController extends Controller
         $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
         $courseModel->durasi = $duration;
         $courseModel->judul = $course['title'];
-        $courseModel->konten = $course['content'];
+        $courseModel->konten = $this->base64Processing($course['content']);
         $courseModel->save();
 
         $courseMeta['materi_id'] = $courseModel->id;
         $courseMeta['guru_id'] = $request->guruId;
-        $courseMeta->description = $course['description'];
+        $courseMeta->description = $this->base64Processing($course['description']);
         $courseMeta->save();
 
         $materiCoverGambar['materi_id'] = $courseModel->id;

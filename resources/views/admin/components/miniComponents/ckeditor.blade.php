@@ -8,5 +8,6 @@
         $(document).ready(function() {
             $('.ckeditor').ckeditor();
         });
+    });
     </script>
 @endpush
