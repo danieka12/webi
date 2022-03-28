@@ -251,6 +251,47 @@ class CourseController extends Controller
         return response()->json(['success' => $imageName]);
     }
 
+    public function uploadImageURLHandler(Request $request)
+    {
+        $request->validate([
+            'url' => 'required',
+        ]);
+
+        return response()->json([
+            'success' => 1,
+            'file' => [
+                'url' => $request->input("url")
+            ]
+        ]);
+    }
+
+    public function uploadImageHandler(Request $request)
+    {
+        $request->validate([
+            'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
+        ]);
+
+
+        $imageName = "";
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path($this->locationImage), $imageName);
+
+            return response()->json([
+                'success' => 1,
+                'file' => [
+                    'url' => asset($this->locationImage . "/" . $imageName),
+                ]
+            ]);
+        } else {
+            return response()->json([
+                'success' => 0,
+                'file' => []
+            ]);
+        }
+    }
+
     public function readCourse(string $slug)
     {
         $courseId = $this->getId($slug);
