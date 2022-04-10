@@ -34,6 +34,7 @@
         "@saurav.mitra/editor-table": "^1.0.8",
         "editorjs-break-line": "^0.2.1",
         "editorjs-drag-drop": "^1.0.3",
+        "editorjs-html": "^3.4.2",
         "editorjs-hyperlink-upgrade": "^1.0.9",
         "editorjs-parser": "^1.5.3",
         "editorjs-tooltip": "^1.1.3"

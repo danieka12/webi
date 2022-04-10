@@ -446,12 +446,12 @@ class CourseController extends Controller
         $courseModel['penulis_id'] = Guru::with("penulis")->where("id", $request->guruId)->first()["penulis"]["id"];
         $courseModel->durasi = $duration;
         $courseModel->judul = $course['title'];
-        $courseModel->konten = $this->base64Processing($course['content']);
+        $courseModel->konten = $course['content'];
         $courseModel->save();
 
         $courseMeta['materi_id'] = $courseModel->id;
         $courseMeta['guru_id'] = $request->guruId;
-        $courseMeta->description = $this->base64Processing($course['description']);
+        $courseMeta->description = $course['description'];
         $courseMeta->save();
 
         $materiCoverGambar['materi_id'] = $courseModel->id;

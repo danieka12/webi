@@ -43,4 +43,4 @@ window.List = require("@editorjs/list");
 window.NestedList = require("@editorjs/nested-list");
 window.Underline = require("@editorjs/underline");
 window.Marker = require("@editorjs/marker");
-window.edjsParser = require("editorjs-parser");
+window.edjsHTML = require("editorjs-html");

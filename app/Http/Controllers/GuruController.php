@@ -49,8 +49,8 @@ class GuruController extends Controller
         $writerId = Penulis::where('guru_id', $teacherId)->firstOrFail()->id;
         $sizeOfNewConfirm = GabungMateri::query()->where("konfirmasi_gabung", 0)->get();
         $totalMateri = count(Materi::query()->where('penulis_id', $writerId)->get());
-        $notConfirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get());
-        $confirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', false)->get());
+        $notConfirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', false)->get());
+        $confirm = count(GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get());
         $totalMateriTaken = GabungMateri::where("guru_id", $teacherId)->where('konfirmasi_gabung', true)->get()->toArray();
         $uniqueTotalMateriToken = empty($totalMateriTaken) ? 0 : count(array_unique(array_column($totalMateriTaken, 'siswa_id')));
 

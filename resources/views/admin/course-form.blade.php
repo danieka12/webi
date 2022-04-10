@@ -67,7 +67,8 @@
                                         @include(
                                             'admin.components.miniComponents.required-fill'
                                         )</label>
-                                    <input type="number" min="0" max="100" name="durationHour" class="form-control duration-hour"
+                                    <input type="number" min="0" max="100" name="durationHour"
+                                        class="form-control duration-hour"
                                         value="{{ isset($data) ? $data['durationHour'] : old('durationHour') }}"
                                         placeholder="1 Jam">
                                 </div>
@@ -78,7 +79,8 @@
                                         @include(
                                             'admin.components.miniComponents.required-fill'
                                         )</label>
-                                    <input type="number" min="0" max="60" name="durationMinute" class="form-control duration-minute"
+                                    <input type="number" min="0" max="60" name="durationMinute"
+                                        class="form-control duration-minute"
                                         value="{{ isset($data) ? $data['durationMinute'] : old('durationMinute') }}"
                                         placeholder="30 Menit">
                                 </div>
@@ -172,27 +174,30 @@
     <script>
         $("document").ready(() => {
             $("#btn-save").click((e) => {
+                e.preventDefault()
+
+                let _token = $('meta[name="csrf-token"]').attr("content");
                 let cover = $('.image-upload-value').val()
                 let courseId = $('.guru-id').val()
                 let titleCourse = $('.title-course').val()
                 let durationHour = $('.duration-hour').val()
                 let durationMinute = $('.duration-minute').val()
                 let coursePurpose = $('.course-purpose').val()
-                let descriptionCourse = $('.description-course').val()
-                let optionCourse = $('.option-course').val()
-                let courseDescription = $('.course-description').val()
+                let optionCourse = $('.livesearch').find(':selected').val()
+                let courseDescription = ""
 
-                alert([
-                    cover,
-                    courseId,
-                    titleCourse,
-                    durationHour,
-                    durationMinute,
-                    coursePurpose,
-                    descriptionCourse,
-                    optionCourse,
-                    courseDescription
-                ])
+
+                editor.save().then((outputData) => {
+                    const parser = new edjsHTML();
+                    const html = parser.parse(outputData);
+                    courseDescription = html
+                }).catch((error) => {
+                    console.log('Saving failed: ', error)
+                });
+
+
+
+
             })
         })
     </script>
