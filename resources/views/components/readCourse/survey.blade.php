@@ -18,7 +18,7 @@
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>Kejelasan Pembelajaran</td>
+                    <td>Kejelasan Tujuan Pembelajaran</td>
                     <td>
                         <div class="form-check">
                             <input value="on" class="form-check-input" type="radio" name="kejelasanMateri"
@@ -99,7 +99,7 @@
                 </tr>
                 <tr>
                     <th scope="row">5</th>
-                    <td>Pemahaman Materi</td>
+                    <td>Kemudahan Pemahaman Materi</td>
                     <td>
                         <div class="form-check">
                             <input value="on" class="form-check-input" type="radio" name="pemahamanMateri"
@@ -119,6 +119,26 @@
                 </tr>
                 <tr>
                     <th scope="row">6</th>
+                    <td>Kejelasan Informasi Gambar Maupun Media Video</td>
+                    <td>
+                        <div class="form-check">
+                            <input value="on" class="form-check-input" type="radio" name="kejelasanInformasi"
+                                id="kejelasanInformasi">
+                            <label class="form-check-label" for="kejelasanInformasi">
+                                Mudah
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="off" class="form-check-input" type="radio" name="kejelasanInformasi"
+                                id="kejelasanInformasi">
+                            <label class="form-check-label" for="kejelasanInformasi">
+                                Tidak Mudah
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">7</th>
                     <td>Kemudahan Pemakaian</td>
                     <td>
                         <div class="form-check">
@@ -132,6 +152,66 @@
                             <input value="off" class="form-check-input" type="radio" name="kemudahanPemakaian"
                                 id="kemudahanPemakaian">
                             <label class="form-check-label" for="kemudahanPemakaian">
+                                Tidak Mudah
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">8</th>
+                    <td>Penggunaan Media Yang Efektif</td>
+                    <td>
+                        <div class="form-check">
+                            <input value="on" class="form-check-input" type="radio" name="pengunaanMedia"
+                                id="pengunaanMedia">
+                            <label class="form-check-label" for="pengunaanMedia">
+                                Mudah
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="off" class="form-check-input" type="radio" name="pengunaanMedia"
+                                id="pengunaanMedia">
+                            <label class="form-check-label" for="pengunaanMedia">
+                                Tidak Mudah
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">9</th>
+                    <td>Keefektifan Media Pembelajaran</td>
+                    <td>
+                        <div class="form-check">
+                            <input value="on" class="form-check-input" type="radio" name="keektifanMedia"
+                                id="keektifanMedia">
+                            <label class="form-check-label" for="keektifanMedia">
+                                Mudah
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="off" class="form-check-input" type="radio" name="keektifanMedia"
+                                id="keektifanMedia">
+                            <label class="form-check-label" for="keektifanMedia">
+                                Tidak Mudah
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">10</th>
+                    <td>Kemudahan Interaksi Dengan Media</td>
+                    <td>
+                        <div class="form-check">
+                            <input value="on" class="form-check-input" type="radio" name="kemudahanInteraksi"
+                                id="kemudahanInteraksi">
+                            <label class="form-check-label" for="kemudahanInteraksi">
+                                Mudah
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input value="off" class="form-check-input" type="radio" name="kemudahanInteraksi"
+                                id="kemudahanInteraksi">
+                            <label class="form-check-label" for="kemudahanInteraksi">
                                 Tidak Mudah
                             </label>
                         </div>

@@ -23,6 +23,10 @@ class CreateAngketsTable extends Migration
             $table->boolean("contoh_penjelasan")->default(false);
             $table->boolean("kejelasan_bahasa")->default(false);
             $table->boolean("pemahaman_materi")->default(false);
+            $table->boolean("kejelasan_informasi")->default(false);
+            $table->boolean("penggunaan_media")->default(false);
+            $table->boolean("keektifan_media")->default(false);
+            $table->boolean("kemudahan_interaksi")->default(false);
             $table->boolean("kemudahan_pemakaian")->default(false);
             $table->timestamps();
 

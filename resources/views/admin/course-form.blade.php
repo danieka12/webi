@@ -39,7 +39,8 @@
         <div class="container-fluid">
             <input name="image" type="hidden" value="{{ isset($data) ? $data['image']['name'] : '' }}"
                 class="image-upload-value">
-            <input type="hidden" name="guruId" value="{{ Auth::guard('guru')->user()->id }}" class="guru-id" />
+            <input type="hidden" name="guruId" class="guru-id" value="{{ Auth::guard('guru')->user()->id }}"
+                class="guru-id" />
             <div class="box_general padding_bottom">
                 <div class="header_box version_2">
                     @if (isset($data))
@@ -177,12 +178,13 @@
                 e.preventDefault()
 
                 let _token = $('meta[name="csrf-token"]').attr("content");
+                let teacherId = $('.guru-id').val()
                 let cover = $('.image-upload-value').val()
                 let courseId = $('.guru-id').val()
                 let titleCourse = $('.title-course').val()
                 let durationHour = $('.duration-hour').val()
                 let durationMinute = $('.duration-minute').val()
-                let coursePurpose = $('.course-purpose').val()
+                let coursePurpose = "$('.course-purpose').val()"
                 let optionCourse = $('.livesearch').find(':selected').val()
                 let courseDescription = ""
 
@@ -190,13 +192,31 @@
                 editor.save().then((outputData) => {
                     const parser = new edjsHTML();
                     const html = parser.parse(outputData);
-                    courseDescription = html
+                    courseDescription = html.join("<br>")
+
+
+                    $.ajax({
+                        url: "{{ route('guru.course.update') }}",
+                        type: "POST",
+                        data: {
+                            categoryId: optionCourse,
+                            guruId: teacherId,
+                            title: titleCourse,
+                            content: courseDescription,
+                            description: coursePurpose,
+                            image: cover,
+                            durationHour,
+                            durationMinute,
+                            _token
+                        },
+                        success: (response) => {
+                            if (response) window.location.href = "{{ route('guru.course') }}"
+                        },
+                        error: (e) => alert(e)
+                    })
                 }).catch((error) => {
                     console.log('Saving failed: ', error)
                 });
-
-
-
 
             })
         })
